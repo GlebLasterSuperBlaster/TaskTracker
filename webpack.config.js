@@ -8,7 +8,7 @@ Encore
 
 
     .addEntry('js/index', './assets/js/index.js')
-    .addEntry('js/login', './assets/js/login.js')
+    .addEntry('js/profile', './assets/js/profile.js')
     .addStyleEntry('css/style',['./assets/css/style.css'])
     .addStyleEntry('css/index',['./assets/css/index.css'])
     .addStyleEntry('css/registerpage',['./assets/css/registerpage.css'])

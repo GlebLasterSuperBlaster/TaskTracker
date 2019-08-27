@@ -22,8 +22,6 @@
   justify-content: center;
   flex-wrap: wrap;
   flex-direction: column;
-  height: 440px;
-
 }
 
 .inputRegisterMenu {
@@ -83,19 +81,19 @@
 .containerForRegisterMenu{
   display: flex;
   width: 100%;
-  margin-top: 96px;
+  margin-top: 33px;
 }
 
 .containerForProjectAndTask{
   justify-content: space-between;
-  margin-top: 60px;
+  margin-top: 40px;
   display: flex;
-  width: 100%;
+  width: 85%;
   flex-direction: column;
 }
 
 .project {
-  height: 240px;
+  height: 230px;
   overflow: auto;
   display: flex;
   flex-direction: column;
@@ -104,7 +102,7 @@
 }
 
 .task{
-  height: 240px;
+  height: 230px;
   overflow: auto;
   display: flex;
   flex-direction: column;
