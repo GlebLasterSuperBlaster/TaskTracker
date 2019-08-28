@@ -25,7 +25,7 @@
                            value="{{ app.user.name }}">
                 </div>
                 <div class=" blockForError">
-                    <div class="errorStyle">{% if errors.name is defined%}{{ errors.name }}{% endif %}</div>
+                    <div class="errorStyle">{{ errors.name|default(null) }}</div>
                 </div>
 
                 <label class="labelRegisterMenu" for="user_lastName">Last name</label>
@@ -34,7 +34,7 @@
                            value="{{ app.user.lastName }}">
                 </div>
                 <div class=" blockForError">
-                    <div class="errorStyle"> {% if errors.lastName is defined%}{{ errors.lastName  }}{% endif %}</div>
+                    <div class="errorStyle">{{ errors.lastName|default(null)  }}</div>
                 </div>
 
                 <label class="labelRegisterMenu" for="currentPassword">Password</label>
@@ -42,24 +42,23 @@
                     <input type="password" name="user[currentPassword]" class="inputRegisterMenu" placeholder="Password">
                 </div>
                     <div class="blockForError">
-                        <div class="errorStyle">{% if errors.notValidCurrentPassword is defined%}{{ errors.notValidCurrentPassword }}{% endif %}</div>
+                        <div class="errorStyle">{{ errors.notValidCurrentPassword|default(null) }}</div>
                     </div>
                 <label class="labelRegisterMenu" for="user_password_first">Change password</label>
                 <div class="rightShowError">
                     <input type="password" name="user[password][first]" class="inputRegisterMenu" placeholder="New password" v-model="user_password_first">
                 </div>
                 <div class="blockForError">
-                    <div class="errorStyle">{% if errors.password is defined%}{{ errors.password }}{% endif %}</div>
+                    <div class="errorStyle">{{ errors.password|default(null) }}</div>
                 </div>
 
                 <label class="labelRegisterMenu" for="user_password_second">Confirm new password</label>
                 <div class="rightShowError">
                     <input type="password" name="user[password][second]" class="inputRegisterMenu" placeholder="Confirm new password" v-model="user_password_second">
                 </div>
-                <div class="blockForError">
-                    <div class="errorStyle" v-if="errors.length">${ errors }</div>
-
-                </div>
+                    <div class="blockForError">
+                        <div class="errorStyle">{{ errors.notEqualPassword|default(null) }}</div>
+                    </div>
 
                 <button type="submit" class="inputRegisterMenu inputRegisterMenuButton" value="Create account">Save
                     changes
@@ -147,7 +146,4 @@
 
 
 {% endblock %}
-{% block customJs %}
-    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
-       <script src="{{ asset('build/js/profile.js') }}"></script>
-{% endblock %}
+

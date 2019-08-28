@@ -45,7 +45,6 @@ class UserController extends AbstractController
      * @Route("/register", name="register")
      * @Template()
      * @param Request $request
-     * @param UserPasswordEncoderInterface $passwordEncoder
      * @return array|\Symfony\Component\HttpFoundation\RedirectResponse
      */
     public function registerAction(Request $request)
@@ -116,11 +115,12 @@ class UserController extends AbstractController
                     $errors['notValidCurrentPassword'] = 'Current password is wrong';
                 }
 
-                if (!empty($request->request->get('user')['password']['first']) &&
-                    $request->request->get('user')['password']['first'] === $request->request->get('user')['password']['second']) {
-                    {
+                if (!empty($request->request->get('user')['password']['first']) || !empty($request->request->get('user')['password']['second'])) {
+                    if ($request->request->get('user')['password']['first'] === $request->request->get('user')['password']['second']) {
                         $password = $request->request->get('user')['password']['first'];
                         $user->setPassword($password);
+                    } else {
+                        $errors['notEqualPassword'] = 'Fields password and confirm password are not equal';
                     }
                 }
 
@@ -138,9 +138,7 @@ class UserController extends AbstractController
                     $this->dm->persist($user);
                     $this->dm->flush();
                 }
-
             }
-            dump($errors);
         }
 
         return [
@@ -148,5 +146,4 @@ class UserController extends AbstractController
             'errors' => $errors
         ];
     }
-
 }
