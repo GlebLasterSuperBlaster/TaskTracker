@@ -30,7 +30,8 @@
 .inputRegisterMenuButton:hover {
     color: #03a9f4;
     background-color: #ffffff;
-    
+    text-decoration: none;
+
 }
 
 .buttonContainer{

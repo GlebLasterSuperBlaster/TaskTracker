@@ -20,7 +20,6 @@ class FrontController extends AbstractController
         {
             return $this->redirectToRoute('project_index');
         }
-        dump($this->getUser());
         return [
 
         ];

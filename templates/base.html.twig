@@ -5,7 +5,7 @@
     <title>{% block title %}Main page{% endblock %}</title>
     {% block stylesheets %}
         <link rel="stylesheet" href="{{ asset('build/css/style.css') }}"/>
-        <link href="/your-path-to-fontawesome/css/all.css" rel="stylesheet">
+{#        <link href="/your-path-to-fontawesome/css/all.css" rel="stylesheet">#}
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
               integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
     {% endblock %}
@@ -18,9 +18,14 @@
         <div class="logo"><a class="logoLink" href="{{ path('main_page') }}">TaskTracker</a></div>
         <div class="entrance">
             <div class="administrator"><a class="entranceLink" href="{{ path('register') }}">New Account</a></div>
+            {% if app.user is null %}
             <div><a class="entranceLink administrator" href="{{ path('login') }}">Login</a></div>
+            {% endif %}
+            {% if app.user is not null%}
             <div class="administrator"><a class="entranceLink" href="{{ path('logout') }}">Logout</a></div>
-            <div class="administrator"><a class="entranceLink" href="#">Administrator's office</a></div>
+            <div class="administrator"><a class="entranceLink" href="{{ path('profile') }}">Profile ({{ app.user.name }})</a></div>
+            {% endif %}
+            <div class="administrator"><a class="entranceLink" href="{{ path('admin_main') }}">Administrator's office</a></div>
         </div>
     </div>
 {% endblock %}

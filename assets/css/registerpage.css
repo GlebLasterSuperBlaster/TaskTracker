@@ -1,18 +1,18 @@
 .container {
   margin: 0 auto;
-  width: 600px;
+
   height: 700px;
   display: flex;
-  justify-content: center;
+  justify-content: space-between;
   align-items: center;
   flex: 1 0 auto;
 }
 
 .registerMenu {
+  width: 67%;
   margin: 0 auto;
   display: flex;
   justify-content: center;
-  align-items: center;
   flex-wrap: wrap;
   flex-direction: column;
 }
@@ -24,7 +24,6 @@
   border: 2px solid #dddddd;
   background-color: white;
   padding-left: 10px;
-  margin-top: 15px;
   display: flex;
 }
 
@@ -57,12 +56,31 @@
 
 .errorStyle{
   color: red;
-  margin: 10px 0 10px 0;
+  font-size: 13px;
+  padding: 3px 0 3px 0;
 }
 
 .badge{
   color: red;
   background-color: white;
+}
+
+.rightShowError{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  margin-bottom: 10px;
+
+}
+
+.blockCenterMenu{
+  width: 30%;
+  height: 100%;
+
+}
+
+.blockForError{
+  height: 24px;
 }
 
 

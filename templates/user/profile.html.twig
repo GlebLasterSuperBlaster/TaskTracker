@@ -1,0 +1,149 @@
+{% extends 'base.html.twig' %}
+{% block customStylesheets %}
+    <link rel="stylesheet" href="{{ asset('build/css/profile.css') }}"/>
+{% endblock %}
+{% block title %}Register{% endblock %}
+
+{% block body %}
+    <div class="profile">Profile</div>
+    <div class="container">
+        <div class="containerForRegisterMenu">
+            <div class="registerMenu">
+                <form name="user" id="app" action="{{ path('profile') }}" method="post" @submit="checkForm">
+
+                <label class="labelRegisterMenu" for="user_email">Email</label>
+                <div class="rightShowError">
+                    <input type="email" name="user[email]" class="inputRegisterMenu" placeholder="Your email"
+                           disabled="disabled" value="{{ app.user.email }}">
+                </div>
+                <div class="blockForError">
+                </div>
+
+                <label class="labelRegisterMenu" for="user_name">Name</label>
+                <div class="rightShowError">
+                    <input type="text" name="user[name]" class="inputRegisterMenu" placeholder="Your last name"
+                           value="{{ app.user.name }}">
+                </div>
+                <div class=" blockForError">
+                    <div class="errorStyle">{{ errors.name|default(null) }}</div>
+                </div>
+
+                <label class="labelRegisterMenu" for="user_lastName">Last name</label>
+                <div class="rightShowError">
+                    <input type="text" name="user[lastName]" class="inputRegisterMenu" placeholder="Your last name"
+                           value="{{ app.user.lastName }}">
+                </div>
+                <div class=" blockForError">
+                    <div class="errorStyle">{{ errors.lastName|default(null)  }}</div>
+                </div>
+
+                <label class="labelRegisterMenu" for="currentPassword">Password</label>
+                <div class="rightShowError">
+                    <input type="password" name="user[currentPassword]" class="inputRegisterMenu" placeholder="Password">
+                </div>
+                    <div class="blockForError">
+                        <div class="errorStyle">{{ errors.notValidCurrentPassword|default(null) }}</div>
+                    </div>
+                <label class="labelRegisterMenu" for="user_password_first">Change password</label>
+                <div class="rightShowError">
+                    <input type="password" name="user[password][first]" class="inputRegisterMenu" placeholder="New password" v-model="user_password_first">
+                </div>
+                <div class="blockForError">
+                    <div class="errorStyle">{{ errors.password|default(null) }}</div>
+                </div>
+
+                <label class="labelRegisterMenu" for="user_password_second">Confirm new password</label>
+                <div class="rightShowError">
+                    <input type="password" name="user[password][second]" class="inputRegisterMenu" placeholder="Confirm new password" v-model="user_password_second">
+                </div>
+                    <div class="blockForError">
+                        <div class="errorStyle">{{ errors.notEqualPassword|default(null) }}</div>
+                    </div>
+
+                <button type="submit" class="inputRegisterMenu inputRegisterMenuButton" value="Create account">Save
+                    changes
+                </button>
+
+                <input type="hidden" name="token" value="{{ csrf_token('user-profile') }}"/>
+                </form>
+            </div>
+        </div>
+        <div class="containerForProjectAndTask">
+            <span class="textProejctAndTask"><p>Projects</p></span>
+            <div class="containerForTextAndProjectandTask">
+
+                <div class="project">
+                    <div class="marginForLink marginFirstLink"><a href="#" class="taskAndProjectLink"><i
+                                    class="fas fa-crown"></i>
+                            Lorem ipsum dolor sit amet,
+                            consectetur adipisicing elit. Quas, repudiandae.</a></div>
+                    <div class="marginForLink"><a href="#" class="taskAndProjectLink">Lorem ipsum dolor sit amet,
+                            consectetur adipisicing elit. Nihil, voluptatibus.</a></div>
+                    <div class="marginForLink"><a href="#" class="taskAndProjectLink">Lorem ipsum dolor sit amet,
+                            consectetur adipisicing elit. Nihil, voluptatibus.</a></div>
+                    <div class="marginForLink"><a href="#" class="taskAndProjectLink">Lorem ipsum dolor sit amet,
+                            consectetur adipisicing elit. Nihil, voluptatibus.</a></div>
+                    <div class="marginForLink"><a href="#" class="taskAndProjectLink">Lorem ipsum dolor sit amet,
+                            consectetur adipisicing elit. Nihil, voluptatibus.</a></div>
+                    <div class="marginForLink"><a href="#" class="taskAndProjectLink">Lorem ipsum dolor sit amet,
+                            consectetur adipisicing elit. Nihil, voluptatibus.</a></div>
+                    <div class="marginForLink"><a href="#" class="taskAndProjectLink">Lorem ipsum dolor sit amet,
+                            consectetur adipisicing elit. Nihil, voluptatibus.</a></div>
+                    <div class="marginForLink"><a href="#" class="taskAndProjectLink">Lorem ipsum dolor sit amet,
+                            consectetur adipisicing elit. Nihil, voluptatibus.</a></div>
+                    <div class="marginForLink"><a href="#" class="taskAndProjectLink">Lorem ipsum dolor sit amet,
+                            consectetur adipisicing elit. Nihil, voluptatibus.</a></div>
+                    <div class="marginForLink"><a href="#" class="taskAndProjectLink">Lorem ipsum dolor sit amet,
+                            consectetur adipisicing elit. Nihil, voluptatibus.</a></div>
+
+                </div>
+            </div>
+            <span class="textProejctAndTask"><p>Tasks</p></span>
+            <div class="containerForTextAndProjectandTask">
+
+                <div class="task">
+                    <div class="marginForLink marginFirstLink"><a href="#" class="taskAndProjectLink">Lorem ipsum dolor
+                            sit amet,
+                            consectetur adipisicing elit. Nihil, voluptatibus.</a></div>
+                    <div class="marginForLink"><a href="#" class="taskAndProjectLink">Lorem ipsum dolor sit amet,
+                            consectetur adipisicing elit. Nihil, voluptatibus.</a></div>
+                    <div class="marginForLink"><a href="#" class="taskAndProjectLink">Lorem ipsum dolor sit amet,
+                            consectetur adipisicing elit. Nihil, voluptatibus.</a></div>
+
+                    <div class="marginForLink"><a href="#" class="taskAndProjectLink">Lorem ipsum dolor sit amet,
+                            consectetur adipisicing elit. Nihil, voluptatibus.</a></div>
+                    <div class="marginForLink"><a href="#" class="taskAndProjectLink">Lorem ipsum dolor sit amet,
+                            consectetur adipisicing elit. Nihil, voluptatibus.</a></div>
+                    <div class="marginForLink"><a href="#" class="taskAndProjectLink">Lorem ipsum dolor sit amet,
+                            consectetur adipisicing elit. Nihil, voluptatibus.</a></div>
+                    <div class="marginForLink"><a href="#" class="taskAndProjectLink">Lorem ipsum dolor sit amet,
+                            consectetur adipisicing elit. Nihil, voluptatibus.</a></div>
+                    <div class="marginForLink"><a href="#" class="taskAndProjectLink">Lorem ipsum dolor sit amet,
+                            consectetur adipisicing elit. Nihil, voluptatibus.</a></div>
+                    <div class="marginForLink"><a href="#" class="taskAndProjectLink">Lorem ipsum dolor sit amet,
+                            consectetur adipisicing elit. Nihil, voluptatibus.</a></div>
+                    <div class="marginForLink"><a href="#" class="taskAndProjectLink">Lorem ipsum dolor sit amet,
+                            consectetur adipisicing elit. Nihil, voluptatibus.</a></div>
+                    <div class="marginForLink"><a href="#" class="taskAndProjectLink">Lorem ipsum dolor sit amet,
+                            consectetur adipisicing elit. Nihil, voluptatibus.</a></div>
+                    <div class="marginForLink"><a href="#" class="taskAndProjectLink">Lorem ipsum dolor sit amet,
+                            consectetur adipisicing elit. Nihil, voluptatibus.</a></div>
+                    <div class="marginForLink"><a href="#" class="taskAndProjectLink">Lorem ipsum dolor sit amet,
+                            consectetur adipisicing elit. Nihil, voluptatibus.</a></div>
+                    <div class="marginForLink"><a href="#" class="taskAndProjectLink">Lorem ipsum dolor sit amet,
+                            consectetur adipisicing elit. Nihil, voluptatibus.</a></div>
+                    <div class="marginForLink"><a href="#" class="taskAndProjectLink">Lorem ipsum dolor sit amet,
+                            consectetur adipisicing elit. Nihil, voluptatibus.</a></div>
+                    <div class="marginForLink"><a href="#" class="taskAndProjectLink">Lorem ipsum dolor sit amet,
+                            consectetur adipisicing elit. Nihil, voluptatibus.</a></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+
+
+{% endblock %}
+

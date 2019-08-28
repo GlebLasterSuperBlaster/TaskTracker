@@ -8,12 +8,13 @@ Encore
 
 
     .addEntry('js/index', './assets/js/index.js')
-    .addEntry('js/login', './assets/js/login.js')
+    .addEntry('js/profile', './assets/js/profile.js')
     .addStyleEntry('css/style',['./assets/css/style.css'])
     .addStyleEntry('css/index',['./assets/css/index.css'])
     .addStyleEntry('css/registerpage',['./assets/css/registerpage.css'])
     .addStyleEntry('css/loginpage',['./assets/css/loginpage.css'])
     .addStyleEntry('css/style2',['./assets/css/style2.css'])
+    .addStyleEntry('css/profile',['./assets/css/profile.css'])
 
     .enableSassLoader()
 

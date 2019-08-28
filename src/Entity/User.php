@@ -4,6 +4,7 @@ namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
+use Symfony\Component\Security\Core\User\EquatableInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Validator\Constraints as Assert;
 
@@ -44,12 +45,14 @@ class User implements UserInterface
 
     /**
      * @Assert\NotBlank(message="Пожалуйста, введите имя")
+     * @Assert\Length(min=3, minMessage="Min 3 symbols required for name")
      * @ORM\Column(type="string", length=50)
      */
     private $name;
 
     /**
      * @Assert\NotBlank(message="Пожалуйста, введите фамилию")
+     * * @Assert\Length(min=3, minMessage="Min 3 symbols required for lastName")
      * @ORM\Column(type="string", length=50)
      */
     private $lastName;

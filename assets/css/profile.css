@@ -1,0 +1,209 @@
+::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
+  color: #999999;
+  opacity: 1; /* Firefox */
+}
+
+:-ms-input-placeholder { /* Internet Explorer 10-11 */
+  color: #999999;
+}
+
+::-ms-input-placeholder { /* Microsoft Edge */
+  color: #999999;
+}
+.container {
+  margin: 0 auto;
+  display: flex;
+  flex: 1 0 auto;
+}
+
+.registerMenu {
+  margin: 0 auto;
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  flex-direction: column;
+}
+
+.inputRegisterMenu {
+  width: 440px;
+  height: 40px;
+  border-radius: 5px;
+  border: 2px solid #dddddd;
+  background-color: white;
+  padding-left: 10px;
+  display: flex;
+}
+
+.inputRegisterMenuButton {
+  width: 130px;
+  height: 40px;
+  box-shadow: 0 3px 6px rgba(2, 136, 209, 0.5);
+  border-radius: 5px;
+  background-color: #03a9f4;
+  color: #ffffff;
+  font-family: Roboto, serif;
+  font-size: 13px;
+  font-weight: 700;
+  margin-left: 170px;
+  transition: 2s;
+  padding-left: 20px;
+}
+
+.labelRegisterMenu {
+  color: #212121;
+  font-family: Roboto, serif;
+  font-size: 13px;
+  font-weight: 700;
+}
+
+.inputRegisterMenuButton:hover {
+  color: #03a9f4;
+  background-color: #ffffff;
+}
+
+.errorStyle{
+  color: red;
+  font-size: 13px;
+  padding: 3px 0 3px 0;
+}
+
+.badge{
+  color: red;
+  background-color: white;
+}
+
+.rightShowError{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.containerForRegisterMenu{
+  display: flex;
+  width: 100%;
+  margin-top: 33px;
+}
+
+.containerForProjectAndTask{
+  justify-content: space-between;
+  margin-top: 40px;
+  display: flex;
+  width: 85%;
+  flex-direction: column;
+}
+
+.project {
+  height: 230px;
+  overflow: auto;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  justify-items: center;
+}
+
+.task{
+  height: 230px;
+  overflow: auto;
+  display: flex;
+  flex-direction: column;
+
+}
+
+.profile {
+  display: flex;
+  color: #212121;
+  font-family: Roboto, serif;
+  font-size: 26px;
+  font-weight: 700;
+  height: 159px;
+  border-bottom: 1px solid #dddddd;
+  width: 100%;
+  align-items: center;
+  justify-content: center;
+  padding: 25px 0 25px 0;
+}
+
+.textProejctAndTask{
+  color: #212121;
+  font-family: Roboto, serif;
+  font-size: 20px;
+  font-weight: 500;
+  display: flex;
+  justify-content: center;
+
+}
+
+.containerForTextAndProjectandTask{
+  border: 2px solid #dddddd;
+  border-radius: 5px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  margin-bottom: 30px;
+}
+
+.taskAndProjectLink{
+  text-decoration: none;
+  color: #212121;
+  font-family: Roboto, serif;
+  font-size: 16px;
+  font-weight: 400;
+}
+
+
+.taskAndProjectLink:hover,.taskAndProjectLink:focus{
+  color: #212121;
+  text-decoration: none;
+}
+
+.taskAndProjectLink:visited{
+  color: #212121;
+}
+
+.marginForLink{
+  margin-bottom: 10px;
+  padding: 0 30px 0 30px;
+}
+
+.blockForError{
+  height: 24px;
+}
+
+::-webkit-scrollbar-button {
+  background-repeat:no-repeat;
+  width:6px;
+  height:0;
+}
+
+::-webkit-scrollbar-track {
+  background-color:#dddddd;
+  box-shadow:0 0 3px #000 inset;
+  border-radius: 5px;
+}
+
+::-webkit-scrollbar-thumb {
+  -webkit-border-radius: 5px;
+  border-radius: 5px;
+  background-color:#03a9f4;
+  box-shadow:0 1px 1px #fff inset;
+  background-image:url('https://yraaa.ru/_pu/24/59610063.png');
+  background-position:center;
+  background-repeat:no-repeat;
+}
+
+::-webkit-resizer{
+  background-repeat:no-repeat;
+  width:7px;
+  height:0;
+}
+
+::-webkit-scrollbar{
+  width: 11px;
+}
+
+.marginFirstLink{
+  margin-top: 10px;
+}
+
+
+/*# sourceMappingURL=registerpage.css.map */

@@ -76,9 +76,18 @@ body {
   margin-right: 15px;
 }
 
-a:focus, a:hover {
-  color: #ffffff!important;
-  text-decoration: none!important;
+.entranceLink:focus, .entranceLink:hover {
+  color: #ffffff;
+  text-decoration: none;
+}
+
+.logoLink:focus, .logoLink:hover{
+  color: #ffffff;
+  text-decoration: none;
+}
+
+.gitIcon{
+  margin-left: -37px;
 }
 
 /*# sourceMappingURL=style.css.map */
