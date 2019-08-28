@@ -25,7 +25,7 @@
             <div class="administrator"><a class="entranceLink" href="{{ path('logout') }}">Logout</a></div>
             <div class="administrator"><a class="entranceLink" href="{{ path('profile') }}">Profile ({{ app.user.name }})</a></div>
             {% endif %}
-            <div class="administrator"><a class="entranceLink" href="#">Administrator's office</a></div>
+            <div class="administrator"><a class="entranceLink" href="{{ path('admin_main') }}">Administrator's office</a></div>
         </div>
     </div>
 {% endblock %}
