@@ -5,8 +5,9 @@
 {% block body %}
   <div class="project">New Project</div>
   <div class="container">
+    <form action="#">
+      <div class="containerLeftAndRight">
     <div class="containerProjectAndTitle">
-      <form action="#">
         <div class="projectTitle"><label class="labelProjectInput" for="project_title">Title</label><input
                   id="project_title" name="project_title"
                   class="inputProjectMenu" type="text" placeholder="write Title"></div>
@@ -14,36 +15,53 @@
                                                for="project_description">Description</label>
           <textarea name="project_description" id="project_description" class="projectDescriptionTextArea"
                     cols="30" rows="10" placeholder="Description Project"></textarea></div>
-        <input class="inputProjectSubmit" type="submit" value="Create Project">
-      </form>
+
     </div>
     <div class="userList">
-      <div class="borderUserList"><label class="labelProjectInput" for="userListSelect">User List</label>
-        <select name="userListSelect" id="userListSelect">
+      <label class="labelProjectInput" for="userListSelect">User List</label>
+      <div class="borderUserList">
+        <select name="userListSelect" id="userListSelect" class="userListSelect">
           <option> User1</option>
           <option> User2</option>
           <option> User3</option>
         </select>
         <div class="userListLink">
-          <div><a href="#" class="taskAndProjectLink">Lorem ipsum dolor sit amet.</a>
-            <button><i class="fas fa-user-minus"></i>
+          <div class="userLinkMargin" ><a href="#" class="taskAndProjectLink">Lorem ipsum dolor sit amet.</a>
+            <button class="buttonMargin"><i class="fas fa-user-minus"></i>
             </button>
           </div>
-          <div><a href="#" class="taskAndProjectLink">Lorem ipsum dolor sit amet.</a>
-            <button><i class="fas fa-user-minus"></i>
+          <div class="userLinkMargin"><a href="#" class="taskAndProjectLink">Lorem ipsum dolor sit amet.</a>
+            <button class="buttonMargin"><i class="fas fa-user-minus"></i>
             </button>
           </div>
-          <div><a href="#" class="taskAndProjectLink">Lorem ipsum dolor sit amet.</a>
-            <button><i class="fas fa-user-minus"></i>
+          <div class="userLinkMargin"><a href="#" class="taskAndProjectLink">Lorem ipsum dolor sit amet.</a>
+            <button class="buttonMargin"><i class="fas fa-user-minus"></i>
             </button>
           </div>
-          <div><a href="#" class="taskAndProjectLink">Lorem ipsum dolor sit amet.</a>
-            <button><i class="fas fa-user-minus"></i>
+          <div class="userLinkMargin"><a href="#" class="taskAndProjectLink">Lorem ipsum dolor sit amet.</a>
+            <button class="buttonMargin"><i class="fas fa-user-minus"></i>
+            </button>
+          </div>
+          <div class="userLinkMargin"><a href="#" class="taskAndProjectLink">Lorem ipsum dolor sit amet.</a>
+            <button class="buttonMargin"><i class="fas fa-user-minus"></i>
+            </button>
+          </div>
+          <div class="userLinkMargin"><a href="#" class="taskAndProjectLink">Lorem ipsum dolor sit amet.</a>
+            <button class="buttonMargin"><i class="fas fa-user-minus"></i>
+            </button>
+          </div>
+          <div class="userLinkMargin"><a href="#" class="taskAndProjectLink">Lorem ipsum dolor sit amet.</a>
+            <button class="buttonMargin"><i class="fas fa-user-minus"></i>
             </button>
           </div>
         </div>
       </div>
     </div>
+      </div>
+      <div class="inputCenter">
+      <input class="inputProjectSubmit" type="submit" value="Create Project">
+      </div>
+    </form>
   </div>
   <div>
   </div>

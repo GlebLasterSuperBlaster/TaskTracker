@@ -1,6 +1,6 @@
 .container {
   margin: 0 auto;
-  height: 700px;
+  height: 600px;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -22,13 +22,14 @@
 }
 
 .inputProjectMenu {
-  width: 440px;
+  width: 340px;
   height: 40px;
   border-radius: 5px;
   border: 2px solid #dddddd;
   background-color: white;
   padding-left: 10px;
   display: flex;
+  margin-bottom: 10px;
 }
 
 .labelProjectInput {
@@ -57,12 +58,15 @@
 .userList{
   display: flex;
   flex-direction: column;
+  margin-right: 64px;
 }
 
 .borderUserList{
   display: flex;
   flex-direction: column;
   border: 2px solid #dddddd;
+  height: 280px;
+  overflow: auto;
 }
 
 .taskAndProjectLink{
@@ -93,14 +97,74 @@
   font-family: Roboto, serif;
   font-size: 13px;
   font-weight: 700;
-  margin-left: 170px;
   transition: 2s;
-  padding-left: 18px;
+  margin-top: 20px;
 }
-
-
 
 .inputProjectSubmit:hover {
   color: #03a9f4;
   background-color: #ffffff;
 }
+
+.userListSelect{
+  width: 100px;
+  margin: 10px 10px 10px;
+}
+
+.userLinkMargin{
+  margin: 0 10px 10px 10px;
+}
+
+.buttonMargin{
+  margin-left: 10px;
+}
+
+::-webkit-scrollbar-button {
+  background-repeat:no-repeat;
+  width:6px;
+  height:0;
+}
+
+::-webkit-scrollbar-track {
+  background-color:#dddddd;
+  box-shadow:0 0 3px #000 inset;
+  border-radius: 5px;
+}
+
+::-webkit-scrollbar-thumb {
+  -webkit-border-radius: 5px;
+  border-radius: 5px;
+  background-color:#03a9f4;
+  box-shadow:0 1px 1px #fff inset;
+  background-image:url('https://yraaa.ru/_pu/24/59610063.png');
+  background-position:center;
+  background-repeat:no-repeat;
+}
+
+::-webkit-resizer{
+  background-repeat:no-repeat;
+  width:7px;
+  height:0;
+}
+
+::-webkit-scrollbar{
+  width: 11px;
+}
+
+.containerLeftAndRight{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  width: 850px;
+}
+
+.inputCenter{
+  display: flex;
+  justify-content: center;
+}
+
+.containerProjectAndTitle{
+  width: 40%;
+}
+
+
