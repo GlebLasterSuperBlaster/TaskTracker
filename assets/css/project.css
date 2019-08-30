@@ -1,0 +1,106 @@
+.container {
+  margin: 0 auto;
+  height: 700px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex: 1 0 auto;
+}
+
+.project {
+  display: flex;
+  color: #212121;
+  font-family: Roboto, serif;
+  font-size: 26px;
+  font-weight: 700;
+  height: 159px;
+  border-bottom: 1px solid #dddddd;
+  width: 100%;
+  align-items: center;
+  justify-content: center;
+  padding: 25px 0 25px 0;
+}
+
+.inputProjectMenu {
+  width: 440px;
+  height: 40px;
+  border-radius: 5px;
+  border: 2px solid #dddddd;
+  background-color: white;
+  padding-left: 10px;
+  display: flex;
+}
+
+.labelProjectInput {
+  color: #212121;
+  font-family: Roboto, serif;
+  font-size: 13px;
+  font-weight: 700;
+}
+
+.projectDescription{
+  display: flex;
+  flex-direction: column;
+}
+
+.projectDescriptionTextArea{
+  border-radius: 5px;
+  border: 2px solid #dddddd;
+  background-color: white;
+  padding-left: 10px;
+}
+
+.projectDescriptionTextArea:focus{
+  border: 2px solid #dddddd;
+}
+
+.userList{
+  display: flex;
+  flex-direction: column;
+}
+
+.borderUserList{
+  display: flex;
+  flex-direction: column;
+  border: 2px solid #dddddd;
+}
+
+.taskAndProjectLink{
+  text-decoration: none;
+  color: #212121;
+  font-family: Roboto, serif;
+  font-size: 16px;
+  font-weight: 400;
+}
+
+
+.taskAndProjectLink:hover,.taskAndProjectLink:focus{
+  color: #212121;
+  text-decoration: none;
+}
+
+.taskAndProjectLink:visited{
+  color: #212121;
+}
+
+.inputProjectSubmit {
+  width: 130px;
+  height: 40px;
+  box-shadow: 0 3px 6px rgba(2, 136, 209, 0.5);
+  border-radius: 5px;
+  background-color: #03a9f4;
+  color: #ffffff;
+  font-family: Roboto, serif;
+  font-size: 13px;
+  font-weight: 700;
+  margin-left: 170px;
+  transition: 2s;
+  padding-left: 18px;
+}
+
+
+
+.inputProjectSubmit:hover {
+  color: #03a9f4;
+  background-color: #ffffff;
+}

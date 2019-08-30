@@ -1,29 +1,54 @@
 {% extends 'base.html.twig' %}
 {% block customStylesheets %}
-    <link rel="stylesheet" href="{{ asset('build/css/style2.css') }}" />
+    <link rel="stylesheet" href="{{ asset('build/css/project.css') }}"/>
 {% endblock %}
 {% block body %}
-    <div class="all">
-      <div class="page page-contact">
-        <div class="page-nav">
-          <div class="page-nav-inner">
-            <a href="{{ path('project_create') }}" class="btn btn-accent hidden-xs">Add project</a>
-            <div class="group"><a href="#" class="btn btn-default">Others projects</a><a href="#" class="btn btn-default">My projects</a>
-            </div>
-          </div>
+    <div class="project">New Project</div>
+    <div class="container">
+        <div class="containerProjectAndTitle">
+            <form action="#">
+                <div class="projectTitle"><label class="labelProjectInput" for="project_title">Title</label><input
+                            id="project_title" name="project_title"
+                            class="inputProjectMenu" type="text" placeholder="write Title"></div>
+                <div class="projectDescription"><label class="labelProjectInput"
+                                                       for="project_description">Description</label>
+                    <textarea name="project_description" id="project_description" class="projectDescriptionTextArea"
+                              cols="30" rows="10" placeholder="Description Project"></textarea></div>
+                <input class="inputProjectSubmit" type="submit" value="Create Project">
+            </form>
         </div>
-        <div class="page-content">
-          <div class="container-fluid">
-            <div class="blocks">
-              {% for project in projects %}
-                <a class="myblock" href="#">{{ project.name }}
-                    {% if project.invite==1 %}<img class="imagecrown" src="images/crown.png" alt="crown">{% endif %}
-                </a>
-              {% endfor %}
+        <div class="userList">
+            <div class="borderUserList"><label class="labelProjectInput" for="userListSelect">User List</label>
+                <select name="userListSelect" id="userListSelect">
+                    <option> User1</option>
+                    <option> User2</option>
+                    <option> User3</option>
+                </select>
+                <div class="userListLink">
+                    <div><a href="#" class="taskAndProjectLink">Lorem ipsum dolor sit amet.</a>
+                        <button><i class="fas fa-user-minus"></i>
+                        </button>
+                    </div>
+                    <div><a href="#" class="taskAndProjectLink">Lorem ipsum dolor sit amet.</a>
+                        <button><i class="fas fa-user-minus"></i>
+                        </button>
+                    </div>
+                    <div><a href="#" class="taskAndProjectLink">Lorem ipsum dolor sit amet.</a>
+                        <button><i class="fas fa-user-minus"></i>
+                        </button>
+                    </div>
+                    <div><a href="#" class="taskAndProjectLink">Lorem ipsum dolor sit amet.</a>
+                        <button><i class="fas fa-user-minus"></i>
+                        </button>
+                    </div>
+                </div>
             </div>
-
-          </div>
         </div>
-      </div>
+    </div>
+    <div>
     </div>
 {% endblock %}
+
+{% block customJs %}
+    {# <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+     <script src="{{ asset('build/js/userlist.js') }}"></script>#}{% endblock %}
