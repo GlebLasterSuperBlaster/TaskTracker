@@ -1,68 +1,54 @@
 {% extends 'base.html.twig' %}
 {% block customStylesheets %}
-    <link rel="stylesheet" href="{{ asset('build/css/style2.css') }}" />
+  <link rel="stylesheet" href="{{ asset('build/css/project.css') }}"/>
 {% endblock %}
- 
 {% block body %}
-    <div class="all">
-      <div class="page page-task">
-        <div class="page-header">
-          <div class="container-fluid">
-            <h1>New project</h1>
+  <div class="project">New Project</div>
+  <div class="container">
+    <div class="containerProjectAndTitle">
+      <form action="#">
+        <div class="projectTitle"><label class="labelProjectInput" for="project_title">Title</label><input
+                  id="project_title" name="project_title"
+                  class="inputProjectMenu" type="text" placeholder="write Title"></div>
+        <div class="projectDescription"><label class="labelProjectInput"
+                                               for="project_description">Description</label>
+          <textarea name="project_description" id="project_description" class="projectDescriptionTextArea"
+                    cols="30" rows="10" placeholder="Description Project"></textarea></div>
+        <input class="inputProjectSubmit" type="submit" value="Create Project">
+      </form>
+    </div>
+    <div class="userList">
+      <div class="borderUserList"><label class="labelProjectInput" for="userListSelect">User List</label>
+        <select name="userListSelect" id="userListSelect">
+          <option> User1</option>
+          <option> User2</option>
+          <option> User3</option>
+        </select>
+        <div class="userListLink">
+          <div><a href="#" class="taskAndProjectLink">Lorem ipsum dolor sit amet.</a>
+            <button><i class="fas fa-user-minus"></i>
+            </button>
           </div>
-        </div>
-        <div class="page-content">
-          <div class="container-fluid">
-            <form action="#">
-              <div class="row">
-                <div class="col-md-4">
-                  <div class="form-group">
-                    <label>title</label>
-                    <input type="text" placeholder="Design for Home Page" class="form-control">
-                  </div>
-                  <div class="form-group">
-                    <label>date</label>
-                    <input type="text" placeholder="November 17" class="form-control">
-                  </div>
-                </div>
-                 <div class="col-md-4">
-                  <div class="form-group">
-                    <div class="form-group">
-                    <label>category</label>
-                    <select class="form-control">
-                      <option>Life</option>
-                      <option>Career</option>
-                      <option>Academic</option>
-                      <option>Personal</option>
-                      <option>Social</option>
-                    </select>
-                  </div>
-                    <label>invite member</label>
-                    <select class="form-control">
-                      <option>Casey R.</option>
-                      <option>Jesus B.</option>
-                      <option>Evan O.</option>
-                      <option>Bryan W.</option>
-                      <option>Angel O.</option>
-                    </select>
-                  </div>
-                </div>
-                <div class="col-md-4">
-                  <div class="form-group">
-                    <label>description project</label>
-                    <textarea rows="3" class="form-control"></textarea>
-                  </div>
-                </div>
-                <div class="col-md-12">
-                  <div class="form-group"><a href="#">Advanced filter</a></div>
-                  <div class="form-group text-center">
-                    <button type="submit" class="btn btn-accent">create project</button>
-                  </div>
-                </div>
-              </div>
-            </form>
+          <div><a href="#" class="taskAndProjectLink">Lorem ipsum dolor sit amet.</a>
+            <button><i class="fas fa-user-minus"></i>
+            </button>
+          </div>
+          <div><a href="#" class="taskAndProjectLink">Lorem ipsum dolor sit amet.</a>
+            <button><i class="fas fa-user-minus"></i>
+            </button>
+          </div>
+          <div><a href="#" class="taskAndProjectLink">Lorem ipsum dolor sit amet.</a>
+            <button><i class="fas fa-user-minus"></i>
+            </button>
           </div>
         </div>
       </div>
     </div>
+  </div>
+  <div>
+  </div>
 {% endblock %}
+
+{% block customJs %}
+  {# <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+   <script src="{{ asset('build/js/userlist.js') }}"></script>#}{% endblock %}
