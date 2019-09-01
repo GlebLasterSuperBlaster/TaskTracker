@@ -6,13 +6,11 @@ namespace App\Services;
 
 class TokenRandomizeService
 {
-    public $token;
-
     /**
-     * @return mixed
+     * @return string
      */
-    public function __construct()
+    public function generateToken() : string
     {
-        $this->token = substr(sha1(rand()), 0, 100);
+        return sha1(rand());
     }
 }

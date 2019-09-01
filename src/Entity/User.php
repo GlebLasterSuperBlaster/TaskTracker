@@ -54,7 +54,7 @@ class User implements UserInterface
 
     /**
      * @Assert\NotBlank(message="Пожалуйста, введите фамилию")
-     * * @Assert\Length(min=3, minMessage="Min 3 symbols required for lastName")
+     * @Assert\Length(min=3, minMessage="Min 3 symbols required for lastName")
      * @ORM\Column(type="string", length=50)
      */
     private $lastName;
@@ -79,14 +79,29 @@ class User implements UserInterface
      */
     private $projectsInvitedTo;
 
+    /**
+     * @ORM\Column(type="string", length=40)
+     */
+    private $token;
+
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\Task", mappedBy="createdBy")
+     */
+    private $createdTasks;
+
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\Task", mappedBy="executor")
+     */
+    private $executedTasks;
+
     public function __construct()
     {
-        $this->user_project = new ArrayCollection();
-        $this->userProjects = new ArrayCollection();
         $this->invited_user = new ArrayCollection();
         $this->creator_user = new ArrayCollection();
         $this->createdProjects = new ArrayCollection();
         $this->projectsInvitedTo = new ArrayCollection();
+        $this->createdTasks = new ArrayCollection();
+        $this->executedTasks = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -304,6 +319,80 @@ class User implements UserInterface
         if ($this->projectsInvitedTo->contains($projectsInvitedTo)) {
             $this->projectsInvitedTo->removeElement($projectsInvitedTo);
             $projectsInvitedTo->removeInvitedUser($this);
+        }
+
+        return $this;
+    }
+
+    public function getToken(): ?string
+    {
+        return $this->token;
+    }
+
+    public function setToken(string $token): self
+    {
+        $this->token = $token;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Task[]
+     */
+    public function getCreatedTasks(): Collection
+    {
+        return $this->createdTasks;
+    }
+
+    public function addCreatedTask(Task $createdTask): self
+    {
+        if (!$this->createdTasks->contains($createdTask)) {
+            $this->createdTasks[] = $createdTask;
+            $createdTask->setCreatedBy($this);
+        }
+
+        return $this;
+    }
+
+    public function removeCreatedTask(Task $createdTask): self
+    {
+        if ($this->createdTasks->contains($createdTask)) {
+            $this->createdTasks->removeElement($createdTask);
+            // set the owning side to null (unless already changed)
+            if ($createdTask->getCreatedBy() === $this) {
+                $createdTask->setCreatedBy(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Task[]
+     */
+    public function getExecutedTasks(): Collection
+    {
+        return $this->executedTasks;
+    }
+
+    public function addExecutedTask(Task $executedTask): self
+    {
+        if (!$this->executedTasks->contains($executedTask)) {
+            $this->executedTasks[] = $executedTask;
+            $executedTask->setExecutor($this);
+        }
+
+        return $this;
+    }
+
+    public function removeExecutedTask(Task $executedTask): self
+    {
+        if ($this->executedTasks->contains($executedTask)) {
+            $this->executedTasks->removeElement($executedTask);
+            // set the owning side to null (unless already changed)
+            if ($executedTask->getExecutor() === $this) {
+                $executedTask->setExecutor(null);
+            }
         }
 
         return $this;

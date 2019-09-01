@@ -21,47 +21,43 @@ class ProjectController extends AbstractController
     {
         $this->dm = $manager;
     }
+
     /**
-     * @Route("/project", name="project_index")
+     * @Route("/project/{sortBy}/{page}", name="project_index", defaults={"page" : 1, "sortBy" : "null"})
      * @Template()
+     * @param $page
+     * @param null|string $sortBy
+     * @return array|\Symfony\Component\HttpFoundation\RedirectResponse
      */
-    public function indexAction()
+    public function indexAction($page, $sortBy)
     {
+        /**
+         * @var User $user
+         */
         $user = $this->getUser();
         if (!$user) {
             return $this->redirectToRoute('main_page');
         }
+        $projects = $this->dm->getRepository(Project::class)->findAllSorted($user->getId(), $page, $sortBy);
 
-        $userProjects = [];
-
-        $projectsInvitedTo = $user->getProjectsInvitedTo();
-        foreach ($projectsInvitedTo as $project){
-            array_push($userProjects, $project);
-        }
-
-        $projectCreatedByUser = $user->getCreatedProjects();
-        foreach ($projectCreatedByUser as $project){
-            array_push($userProjects, $project);
-        }
-
-        dump($userProjects);
-
-        return $this->render('project/index.html.twig', [
-            'projects' => $userProjects,
-        ]);
+        return [
+            'projects' => $projects,
+        ];
     }
 
     /**
      * @Route("/project/create", name="project_create")
+     * @param TokenRandomizeService $token
+     * @return array
      */
     public function createAction(TokenRandomizeService $token)
     {
 
         dump($token);
-        return $this->render('project/task-project.html.twig', [
+        return [
             'controller_name' => 'ProjectController',
             'token' => $token,
-        ]);
+        ];
     }
 
     /**

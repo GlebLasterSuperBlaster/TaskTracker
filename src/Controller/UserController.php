@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Entity\User;
 use App\Form\UserType;
+use App\Services\TokenRandomizeService;
 use Doctrine\ORM\EntityManagerInterface;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -142,8 +143,6 @@ class UserController extends AbstractController
                 }
             }
         }
-
-        dump($request->request);
 
         return [
             'user' => $user,

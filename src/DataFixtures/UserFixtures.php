@@ -4,6 +4,7 @@ namespace App\DataFixtures;
 
 use App\Entity\Project;
 use App\Entity\User;
+use App\Services\TokenRandomizeService;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Common\Persistence\ObjectManager;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
@@ -14,10 +15,15 @@ class UserFixtures extends Fixture
      * @var UserPasswordEncoderInterface
      */
     private $passwordEncoder;
+    /**
+     * @var TokenRandomizeService
+     */
+    private $tokenService;
 
-    public function __construct(UserPasswordEncoderInterface $passwordEncoder)
+    public function __construct(UserPasswordEncoderInterface $passwordEncoder, TokenRandomizeService $tokenService)
     {
         $this->passwordEncoder = $passwordEncoder;
+        $this->tokenService = $tokenService;
     }
 
     public function load(ObjectManager $manager)
@@ -29,6 +35,7 @@ class UserFixtures extends Fixture
             $user->setEmail($email);
             $user->setRoles($roles);
             $user->setPassword($this->passwordEncoder->encodePassword($user, $password));
+            $user->setToken($this->tokenService->generateToken());
 
             $manager->persist($user);
         }

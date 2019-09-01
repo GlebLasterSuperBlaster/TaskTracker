@@ -4,6 +4,7 @@ namespace App\Repository;
 
 use App\Entity\Project;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
+use Knp\Component\Pager\PaginatorInterface;
 use Symfony\Bridge\Doctrine\RegistryInterface;
 
 /**
@@ -14,10 +15,26 @@ use Symfony\Bridge\Doctrine\RegistryInterface;
  */
 class ProjectRepository extends ServiceEntityRepository
 {
-    public function __construct(RegistryInterface $registry)
+    /**
+     * @var PaginatorInterface $paginator
+     * https://github.com/KnpLabs/KnpPaginatorBundle
+     */
+    private $paginator;
+    /**
+     * @var RegistryInterface
+     */
+    private $registry;
+
+    public function __construct(RegistryInterface $registry, PaginatorInterface $paginator)
     {
         parent::__construct($registry, Project::class);
+        $this->paginator = $paginator;
     }
+//
+//    public function __construct(RegistryInterface $registry)
+//    {
+//        parent::__construct($registry, Project::class);
+//    }
 
     // /**
     //  * @return Project[] Returns an array of Project objects
@@ -47,4 +64,39 @@ class ProjectRepository extends ServiceEntityRepository
         ;
     }
     */
+
+
+    public function findAllSorted(int $userId, int $page, ?string $sortBy)
+    {
+        switch ($sortBy) {
+            case "created_projects":
+                $dbQuery = $this->createQueryBuilder('p')
+                    ->leftJoin('p.createdBy', 'createdBy')
+                    ->andWhere('createdBy = (:val)')
+                    ->setParameter('val', $userId)
+                    ->orderBy('p.createdAt', 'DESC');
+                break;
+            case "invited_to_projects":
+                $dbQuery = $this->createQueryBuilder('p')
+                    ->leftJoin('p.invitedUsers', 'invitedUsers')
+                    ->andWhere('invitedUsers = (:val)')
+                    ->setParameter('val', $userId)
+                    ->orderBy('p.createdAt', 'DESC');
+                break;
+            default:
+                $dbQuery = $this->createQueryBuilder('p')
+                    ->leftJoin('p.createdBy', 'createdBy')
+                    ->leftJoin('p.invitedUsers', 'invitedUsers')
+                    ->andWhere('createdBy = (:val)')
+                    ->orWhere('invitedUsers = (:val)')
+                    ->setParameter('val', $userId)
+                    ->orderBy('p.createdAt', 'DESC');
+                break;
+
+        }
+
+        $pagination = $this->paginator->paginate($dbQuery, $page, 10);
+        return $pagination;
+    }
+
 }
