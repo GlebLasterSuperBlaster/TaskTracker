@@ -142,6 +142,11 @@ class Task
         return $this->createdAt;
     }
 
+    /**
+     * @param \DateTimeInterface $createdAt
+     * @return Task
+     * @ORM\PrePersist()
+     */
     public function setCreatedAt(\DateTimeInterface $createdAt): self
     {
         $this->createdAt = $createdAt;
@@ -154,6 +159,11 @@ class Task
         return $this->updatedAt;
     }
 
+    /**
+     * @param \DateTimeInterface|null $updatedAt
+     * @return Task
+     * @ORM\PreUpdate()
+     */
     public function setUpdatedAt(?\DateTimeInterface $updatedAt): self
     {
         $this->updatedAt = $updatedAt;

@@ -23,7 +23,7 @@ class ProjectController extends AbstractController
     }
 
     /**
-     * @Route("/project/{sortBy}/{page}", name="project_index", defaults={"page" : 1, "sortBy" : "null"})
+     * @Route("/project/{sortBy}/{page}", name="project_index", defaults={"page" : 1, "sortBy" : "all"})
      * @Template()
      * @param $page
      * @param null|string $sortBy
