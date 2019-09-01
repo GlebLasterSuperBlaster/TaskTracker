@@ -3,6 +3,8 @@
 namespace App\Controller;
 
 use App\Entity\Project;
+use App\Entity\User;
+use App\Services\TokenRandomizeService;
 use Doctrine\ORM\EntityManagerInterface;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -25,21 +27,49 @@ class ProjectController extends AbstractController
      */
     public function indexAction()
     {
-        //проверка залогинен ли пользователь
+        $user = $this->getUser();
+        if (!$user) {
+            return $this->redirectToRoute('main_page');
+        }
 
-        $projects = $this->dm->getRepository(Project::class)->findAll();
+        $userProjects = [];
 
-        return [
-            'projects' => $projects,
-        ];
+        $projectsInvitedTo = $user->getProjectsInvitedTo();
+        foreach ($projectsInvitedTo as $project){
+            array_push($userProjects, $project);
+        }
+
+        $projectCreatedByUser = $user->getCreatedProjects();
+        foreach ($projectCreatedByUser as $project){
+            array_push($userProjects, $project);
+        }
+
+        dump($userProjects);
+
+        return $this->render('project/index.html.twig', [
+            'projects' => $userProjects,
+        ]);
     }
 
     /**
      * @Route("/project/create", name="project_create")
      */
-    public function createAction()
+    public function createAction(TokenRandomizeService $token)
     {
+
+        dump($token);
         return $this->render('project/task-project.html.twig', [
+            'controller_name' => 'ProjectController',
+            'token' => $token,
+        ]);
+    }
+
+    /**
+     * @Route("/project/forme", name="project_forme")
+     */
+    public function formeAction()
+    {
+        return $this->render('project/dashboard-forme.html.twig', [
             'controller_name' => 'ProjectController',
         ]);
     }

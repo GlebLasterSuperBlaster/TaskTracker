@@ -2,6 +2,7 @@
 
 namespace App\DataFixtures;
 
+use App\Entity\Project;
 use App\Entity\User;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Common\Persistence\ObjectManager;
@@ -35,6 +36,8 @@ class UserFixtures extends Fixture
         $manager->flush();
     }
 
+
+
     private function getUserData()
     {
         return [
@@ -44,6 +47,7 @@ class UserFixtures extends Fixture
             ['Андрей', 'Петров', 'andrey@mail.ru', 'qwerty', ['ROLE_ADMIN']],
         ];
     }
+
 
 
 }

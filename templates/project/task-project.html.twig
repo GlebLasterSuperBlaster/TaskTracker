@@ -2,9 +2,8 @@
 {% block customStylesheets %}
     <link rel="stylesheet" href="{{ asset('build/css/style2.css') }}" />
 {% endblock %}
- 
+
 {% block body %}
-    <div class="all">
       <div class="page page-task">
         <div class="page-header">
           <div class="container-fluid">
@@ -17,52 +16,62 @@
               <div class="row">
                 <div class="col-md-4">
                   <div class="form-group">
+                   <div class="form-group">
                     <label>title</label>
                     <input type="text" placeholder="Design for Home Page" class="form-control">
-                  </div>
-                  <div class="form-group">
-                    <label>date</label>
-                    <input type="text" placeholder="November 17" class="form-control">
-                  </div>
-                </div>
-                 <div class="col-md-4">
-                  <div class="form-group">
-                    <div class="form-group">
-                    <label>category</label>
-                    <select class="form-control">
-                      <option>Life</option>
-                      <option>Career</option>
-                      <option>Academic</option>
-                      <option>Personal</option>
-                      <option>Social</option>
-                    </select>
-                  </div>
-                    <label>invite member</label>
-                    <select class="form-control">
-                      <option>Casey R.</option>
-                      <option>Jesus B.</option>
-                      <option>Evan O.</option>
-                      <option>Bryan W.</option>
-                      <option>Angel O.</option>
-                    </select>
-                  </div>
-                </div>
-                <div class="col-md-4">
-                  <div class="form-group">
+                    </div>
                     <label>description project</label>
                     <textarea rows="3" class="form-control"></textarea>
                   </div>
                 </div>
+                 <div class="col-md-4 mt-4 w-5">
+                  <div class="form-group">
+                    <div class="form-group">
+                    <div class="btn-group">
+                      <button type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Add user
+                      </button>
+                          <div class="dropdown-menu ">
+                           <div class="adduser">
+                                <p class="dropdown-item">Name</p>
+                                <p class="dropdown-item">Namew</p>
+                                <p class="dropdown-item">Namee</p>
+                            </div>
+                          </div>
+                    </div>
+                  </div>
+                  <div class="adduserfield">
+                  <p class="textxbutton">Name<button type="button" class="xbutton">X</button></p>
+                  <p class="textxbutton">Name<button type="button" class="xbutton">X</button></p>
+                  <p class="textxbutton">Name<button type="button" class="xbutton">X</button></p>
+                  <p class="textxbutton">Name<button type="button" class="xbutton">X</button></p>
+                  <p class="textxbutton">Name<button type="button" class="xbutton">X</button></p>
+                  <p class="textxbutton">Name<button type="button" class="xbutton">X</button></p>
+                  <p class="textxbutton">Name<button type="button" class="xbutton">X</button></p>
+                  <p class="textxbutton">Name<button type="button" class="xbutton">X</button></p>
+                  <p class="textxbutton">Name<button type="button" class="xbutton">X</button></p>
+                  </div>
+                  </div>
+                  </div>
+                </div>
                 <div class="col-md-12">
-                  <div class="form-group"><a href="#">Advanced filter</a></div>
+                  <div class="form-group text-center">
+                    <label>Task</label>
+                    <div class="taskfield">
+                        <p class="textxbutton">Name<button type="button" class="xbutton">X</button></p>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-12">
                   <div class="form-group text-center">
                     <button type="submit" class="btn btn-accent">create project</button>
                   </div>
                 </div>
-              </div>
             </form>
+            </div>
           </div>
         </div>
-      </div>
-    </div>
+ <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
 {% endblock %}

@@ -2,6 +2,8 @@
 
 namespace App\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Security\Core\User\EquatableInterface;
@@ -56,6 +58,36 @@ class User implements UserInterface
      * @ORM\Column(type="string", length=50)
      */
     private $lastName;
+
+    /**
+     * @ORM\ManyToMany(targetEntity="App\Entity\Project", mappedBy="invited_user")
+     */
+    private $invited_user;
+
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\Project", mappedBy="user")
+     */
+    private $creator_user;
+
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\Project", mappedBy="createdBy")
+     */
+    private $createdProjects;
+
+    /**
+     * @ORM\ManyToMany(targetEntity="App\Entity\Project", mappedBy="invitedUsers")
+     */
+    private $projectsInvitedTo;
+
+    public function __construct()
+    {
+        $this->user_project = new ArrayCollection();
+        $this->userProjects = new ArrayCollection();
+        $this->invited_user = new ArrayCollection();
+        $this->creator_user = new ArrayCollection();
+        $this->createdProjects = new ArrayCollection();
+        $this->projectsInvitedTo = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -158,4 +190,123 @@ class User implements UserInterface
 
         return $this;
     }
+
+    /**
+     * @return Collection|Project[]
+     */
+    public function getInvitedUser(): Collection
+    {
+        return $this->invited_user;
+    }
+
+    public function addInvitedUser(Project $invitedUser): self
+    {
+        if (!$this->invited_user->contains($invitedUser)) {
+            $this->invited_user[] = $invitedUser;
+            $invitedUser->addInvitedUser($this);
+        }
+
+        return $this;
+    }
+
+    public function removeInvitedUser(Project $invitedUser): self
+    {
+        if ($this->invited_user->contains($invitedUser)) {
+            $this->invited_user->removeElement($invitedUser);
+            $invitedUser->removeInvitedUser($this);
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Project[]
+     */
+    public function getCreatorUser(): Collection
+    {
+        return $this->creator_user;
+    }
+
+    public function addCreatorUser(Project $creatorUser): self
+    {
+        if (!$this->creator_user->contains($creatorUser)) {
+            $this->creator_user[] = $creatorUser;
+            $creatorUser->setUser($this);
+        }
+
+        return $this;
+    }
+
+    public function removeCreatorUser(Project $creatorUser): self
+    {
+        if ($this->creator_user->contains($creatorUser)) {
+            $this->creator_user->removeElement($creatorUser);
+            // set the owning side to null (unless already changed)
+            if ($creatorUser->getUser() === $this) {
+                $creatorUser->setUser(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Project[]
+     */
+    public function getCreatedProjects(): Collection
+    {
+        return $this->createdProjects;
+    }
+
+    public function addCreatedProject(Project $createdProject): self
+    {
+        if (!$this->createdProjects->contains($createdProject)) {
+            $this->createdProjects[] = $createdProject;
+            $createdProject->setCreatedBy($this);
+        }
+
+        return $this;
+    }
+
+    public function removeCreatedProject(Project $createdProject): self
+    {
+        if ($this->createdProjects->contains($createdProject)) {
+            $this->createdProjects->removeElement($createdProject);
+            // set the owning side to null (unless already changed)
+            if ($createdProject->getCreatedBy() === $this) {
+                $createdProject->setCreatedBy(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Project[]
+     */
+    public function getProjectsInvitedTo(): Collection
+    {
+        return $this->projectsInvitedTo;
+    }
+
+    public function addProjectsInvitedTo(Project $projectsInvitedTo): self
+    {
+        if (!$this->projectsInvitedTo->contains($projectsInvitedTo)) {
+            $this->projectsInvitedTo[] = $projectsInvitedTo;
+            $projectsInvitedTo->addInvitedUser($this);
+        }
+
+        return $this;
+    }
+
+    public function removeProjectsInvitedTo(Project $projectsInvitedTo): self
+    {
+        if ($this->projectsInvitedTo->contains($projectsInvitedTo)) {
+            $this->projectsInvitedTo->removeElement($projectsInvitedTo);
+            $projectsInvitedTo->removeInvitedUser($this);
+        }
+
+        return $this;
+    }
+
 }

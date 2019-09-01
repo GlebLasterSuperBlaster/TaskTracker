@@ -104,7 +104,9 @@ class UserController extends AbstractController
         }
         $errors = [];
 
+
         if ($request->getMethod() == "POST") {
+
             $submittedToken = $request->request->get('token');
             if ($this->isCsrfTokenValid('user-profile', $submittedToken)) {
                 $user->setName($request->request->get('user')['name']);
@@ -140,6 +142,8 @@ class UserController extends AbstractController
                 }
             }
         }
+
+        dump($request->request);
 
         return [
             'user' => $user,

@@ -4,26 +4,25 @@
 {% endblock %}
 {% block body %}
     <div class="all">
-      <div class="page page-contact">
-        <div class="page-nav">
-          <div class="page-nav-inner">
-            <a href="{{ path('project_create') }}" class="btn btn-accent hidden-xs">Add project</a>
-            <div class="group"><a href="#" class="btn btn-default">Others projects</a><a href="#" class="btn btn-default">My projects</a>
+        <div class="page page-contact">
+            <div class="page-nav">
+                <div class="page-nav-inner">
+                    <a href="{{ path('project_create') }}" class="btn btn-accent hidden-xs">Add project</a>
+                    <div class="group"><a href="#" class="btn btn-default">Others projects</a><a href="#" class="btn btn-default">My projects</a>
+                    </div>
+                </div>
             </div>
-          </div>
-        </div>
-        <div class="page-content">
-          <div class="container-fluid">
-            <div class="blocks">
-              {% for project in projects %}
-                <a class="myblock" href="#">{{ project.name }}
-                    {% if project.invite==1 %}<img class="imagecrown" src="images/crown.png" alt="crown">{% endif %}
-                </a>
-              {% endfor %}
+            <div class="page-content">
+                <div class="container-fluid">
+                    <div class="blocks">
+                        {% for project in projects %}
+                            <a class="myblock" href="#">{{ project.name }}
+                                {% if app.user == project.createdBy %}<img class="imagecrown" src="images/crown.png" alt="crown">{% endif %}
+                            </a>
+                        {% endfor %}
+                    </div>
+                </div>
             </div>
-
-          </div>
         </div>
-      </div>
     </div>
 {% endblock %}

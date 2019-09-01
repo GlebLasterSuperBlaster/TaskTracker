@@ -2,9 +2,13 @@
 
 namespace App\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
+ * @ORM\Table(name="projects")
+ * @ORM\HasLifecycleCallbacks()
  * @ORM\Entity(repositoryClass="App\Repository\ProjectRepository")
  */
 class Project
@@ -22,14 +26,9 @@ class Project
     private $name;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="text")
      */
     private $description;
-
-    /**
-     * @ORM\Column(type="integer")
-     */
-    private $category;
 
     /**
      * @ORM\Column(type="datetime")
@@ -37,9 +36,34 @@ class Project
     private $date;
 
     /**
-     * @ORM\Column(type="integer")
+     * @ORM\Column(type="datetime")
      */
-    private $invite;
+    private $created_at;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\User", inversedBy="createdProjects")
+     */
+    private $createdBy;
+
+    /**
+     * @ORM\ManyToMany(targetEntity="App\Entity\User", inversedBy="projectsInvitedTo")
+     */
+    private $invitedUsers;
+
+    /**
+     * @ORM\Column(type="string", length=100)
+     */
+    private $token;
+
+
+    public function __construct()
+    {
+        $this->invites = new ArrayCollection();
+        $this->usersThatInProject = new ArrayCollection();
+        $this->invited_user = new ArrayCollection();
+        $this->invitedUsers = new ArrayCollection();
+    }
+
 
     public function getId(): ?int
     {
@@ -70,18 +94,6 @@ class Project
         return $this;
     }
 
-    public function getCategory(): ?int
-    {
-        return $this->category;
-    }
-
-    public function setCategory(int $category): self
-    {
-        $this->category = $category;
-
-        return $this;
-    }
-
     public function getDate(): ?\DateTimeInterface
     {
         return $this->date;
@@ -94,15 +106,83 @@ class Project
         return $this;
     }
 
-    public function getInvite(): ?int
+
+    public function getCreatedAt(): ?\DateTimeInterface
     {
-        return $this->invite;
+        return $this->created_at;
     }
 
-    public function setInvite(int $invite): self
+
+    /**
+     * @ORM\PrePersist
+     */
+
+    public function setCreatedAt(): self
     {
-        $this->invite = $invite;
+        if(isset($this->created_at2))
+            $this->created_at = $this->created_at2;
+        else
+            $this->created_at = new \DateTime();
+        return $this;
+    }
+
+
+    public function setCreatedAtForFixtures($created_at): self
+    {
+        $this->created_at2 = $created_at;
+
+        return $this;
+
+    }
+
+    public function getCreatedBy(): ?User
+    {
+        return $this->createdBy;
+    }
+
+    public function setCreatedBy(?User $createdBy): self
+    {
+        $this->createdBy = $createdBy;
 
         return $this;
     }
+
+    /**
+     * @return Collection|User[]
+     */
+    public function getInvitedUsers(): Collection
+    {
+        return $this->invitedUsers;
+    }
+
+    public function addInvitedUser(User $invitedUser): self
+    {
+        if (!$this->invitedUsers->contains($invitedUser)) {
+            $this->invitedUsers[] = $invitedUser;
+        }
+
+        return $this;
+    }
+
+    public function removeInvitedUser(User $invitedUser): self
+    {
+        if ($this->invitedUsers->contains($invitedUser)) {
+            $this->invitedUsers->removeElement($invitedUser);
+        }
+        return $this;
+    }
+
+    public function getToken(): ?string
+    {
+        return $this->token;
+    }
+
+    public function setToken(string $token): self
+    {
+        $this->token = $token;
+
+        return $this;
+    }
+
+
 }
