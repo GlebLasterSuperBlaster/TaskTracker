@@ -9,12 +9,13 @@ Encore
 
     .addEntry('js/index', './assets/js/index.js')
     .addEntry('js/profile', './assets/js/profile.js')
-    .addEntry('js/userlist', './assets/js/userlist.js')
+    .addEntry('js/project', './assets/js/project.js')
     .addStyleEntry('css/style',['./assets/css/style.css'])
     .addStyleEntry('css/index',['./assets/css/index.css'])
     .addStyleEntry('css/registerpage',['./assets/css/registerpage.css'])
     .addStyleEntry('css/loginpage',['./assets/css/loginpage.css'])
     .addStyleEntry('css/project',['./assets/css/project.css'])
+    .addStyleEntry('css/projectupdate',['./assets/css/projectupdate.css'])
     .addStyleEntry('css/profile',['./assets/css/profile.css'])
 
     .enableSassLoader()

@@ -167,11 +167,23 @@
   width: 40%;
 }
 
-#app{
+.tasks{
   display: flex;
+  justify-content: center;
+  margin-top: 20px;
   flex-direction: column;
-  width: 300px;
+  align-items: center;
 }
+
+.tasksCenter{
+  display: flex;
+  width: 400px;
+  flex-direction: column;
+  height: 180px;
+  overflow: auto;
+  border: 2px solid #dddddd;
+}
+
 
 
 

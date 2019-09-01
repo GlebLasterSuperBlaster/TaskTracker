@@ -17,46 +17,12 @@
                     cols="30" rows="10" placeholder="Description Project"></textarea></div>
 
     </div>
-    <div class="userList">
-      <label class="labelProjectInput" for="userListSelect">User List</label>
-      <div class="borderUserList">
-        <select name="userListSelect" id="userListSelect" class="userListSelect">
-          <option> User1</option>
-          <option> User2</option>
-          <option> User3</option>
-        </select>
-        <div class="userListLink">
-          <div class="userLinkMargin" ><a href="#" class="taskAndProjectLink">Lorem ipsum dolor sit amet.</a>
-            <button class="buttonMargin"><i class="fas fa-user-minus"></i>
-            </button>
-          </div>
-          <div class="userLinkMargin"><a href="#" class="taskAndProjectLink">Lorem ipsum dolor sit amet.</a>
-            <button class="buttonMargin"><i class="fas fa-user-minus"></i>
-            </button>
-          </div>
-          <div class="userLinkMargin"><a href="#" class="taskAndProjectLink">Lorem ipsum dolor sit amet.</a>
-            <button class="buttonMargin"><i class="fas fa-user-minus"></i>
-            </button>
-          </div>
-          <div class="userLinkMargin"><a href="#" class="taskAndProjectLink">Lorem ipsum dolor sit amet.</a>
-            <button class="buttonMargin"><i class="fas fa-user-minus"></i>
-            </button>
-          </div>
-          <div class="userLinkMargin"><a href="#" class="taskAndProjectLink">Lorem ipsum dolor sit amet.</a>
-            <button class="buttonMargin"><i class="fas fa-user-minus"></i>
-            </button>
-          </div>
-          <div class="userLinkMargin"><a href="#" class="taskAndProjectLink">Lorem ipsum dolor sit amet.</a>
-            <button class="buttonMargin"><i class="fas fa-user-minus"></i>
-            </button>
-          </div>
-          <div class="userLinkMargin"><a href="#" class="taskAndProjectLink">Lorem ipsum dolor sit amet.</a>
-            <button class="buttonMargin"><i class="fas fa-user-minus"></i>
-            </button>
-          </div>
+        <div id="app">
+          <input id="inputId1" type="text" >
+
+          <br/>
+          <a href="#" v-on:click="push">взять из одного input и положить в другой</a>
         </div>
-      </div>
-    </div>
       </div>
       <div class="inputCenter">
       <input class="inputProjectSubmit" type="submit" value="Create Project">
@@ -65,8 +31,9 @@
   </div>
   <div>
   </div>
+
 {% endblock %}
 
 {% block customJs %}
-  {# <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
-   <script src="{{ asset('build/js/userlist.js') }}"></script>#}{% endblock %}
+   <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+   <script src="{{ asset('build/js/project.js') }}"></script>{% endblock %}
