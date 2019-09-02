@@ -25,7 +25,7 @@ class User implements UserInterface
     private $id;
 
     /**
-     * @Assert\NotBlank(message="Пожалуйста, введите адрес элетронной почты")
+     * @Assert\NotBlank(message="Please input the correct email")
      * @Assert\Email()
      * @ORM\Column(type="string", length=180, unique=true)
      */
@@ -38,7 +38,7 @@ class User implements UserInterface
 
     /**
      * @var string The hashed password
-     * @Assert\NotBlank(message="Пожалуйста, введите пароль")
+     * @Assert\NotBlank(message="Please input your password")
      * @Assert\Length(max=4096)
      * @Assert\Length(min=4, minMessage="Min 4 symbols required")
      * @ORM\Column(type="string")
@@ -46,28 +46,18 @@ class User implements UserInterface
     private $password;
 
     /**
-     * @Assert\NotBlank(message="Пожалуйста, введите имя")
+     * @Assert\NotBlank(message="Please input your name")
      * @Assert\Length(min=3, minMessage="Min 3 symbols required for name")
      * @ORM\Column(type="string", length=50)
      */
     private $name;
 
     /**
-     * @Assert\NotBlank(message="Пожалуйста, введите фамилию")
+     * @Assert\NotBlank(message="Please input your last name")
      * @Assert\Length(min=3, minMessage="Min 3 symbols required for lastName")
      * @ORM\Column(type="string", length=50)
      */
     private $lastName;
-
-    /**
-     * @ORM\ManyToMany(targetEntity="App\Entity\Project", mappedBy="invited_user")
-     */
-    private $invited_user;
-
-    /**
-     * @ORM\OneToMany(targetEntity="App\Entity\Project", mappedBy="user")
-     */
-    private $creator_user;
 
     /**
      * @ORM\OneToMany(targetEntity="App\Entity\Project", mappedBy="createdBy")
@@ -96,8 +86,6 @@ class User implements UserInterface
 
     public function __construct()
     {
-        $this->invited_user = new ArrayCollection();
-        $this->creator_user = new ArrayCollection();
         $this->createdProjects = new ArrayCollection();
         $this->projectsInvitedTo = new ArrayCollection();
         $this->createdTasks = new ArrayCollection();

@@ -5,6 +5,7 @@ namespace App\Entity;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Table(name="projects")
@@ -21,12 +22,16 @@ class Project
     private $id;
 
     /**
+     * @Assert\NotBlank(message="Please input project title")
      * @ORM\Column(type="string", length=50)
+     * @Assert\Length(min=3, minMessage="Min 3 symbols required for project title")
      */
     private $name;
 
     /**
      * @ORM\Column(type="text")
+     * @Assert\NotBlank(message="Please input project description")
+     * @Assert\Length(min=5, minMessage="Min 5 symbols required for project description")
      */
     private $description;
 
@@ -64,6 +69,7 @@ class Project
 
     public function __construct()
     {
+
         $this->invitedUsers = new ArrayCollection();
         $this->tasks = new ArrayCollection();
     }

@@ -1,77 +1,67 @@
 {% extends 'base.html.twig' %}
 {% block customStylesheets %}
-    <link rel="stylesheet" href="{{ asset('build/css/style2.css') }}" />
+    <link rel="stylesheet" href="{{ asset('build/css/project.css') }}"/>
+{% endblock %}
+{% block body %}
+    <div class="project">New Project</div>
+    <div class="container">
+        <form name="project" action="{{ path('project_create') }}" method="post">
+            <div class="containerLeftAndRight">
+                <div class="containerProjectAndTitle">
+                    <div class="projectTitle"><label class="labelProjectInput" for="project[title]">Title</label>
+                        <input id="project_title" name="project[title]" class="inputProjectMenu" type="text"
+                               placeholder="write Title" value="{{ project.title|default(null) }}">
+                        <div class="blockForError">
+                            <div class="errorStyle">{{ errors.name|default(null) }}</div>
+                        </div>
+                    </div>
+                    <div class="projectDescription">
+                        <label class="labelProjectInput" for="project[description]">Description</label>
+                        <textarea name="project[description]" id="project_description"
+                                  class="projectDescriptionTextArea"
+                                  cols="30" rows="10" placeholder="Description Project" >{{ project.description|default(null) }}</textarea>
+                        <div class="blockForError">
+                            <div class="errorStyle">{{ errors.description|default(null) }}</div>
+                        </div>
+
+                    </div>
+
+
+                </div>
+                <div id="app">
+                    <input id="inputId1" type="text">
+
+                    <br/>
+                    <a href="#" v-on:click="push">взять из одного input и положить в другой</a>
+
+                    {% if project and project.user %}
+                    {% for email in project.user %}
+                    <a href="#">
+                        <input id="{{ email }}" data-email="{{ email }}" name="project[user][{{ email }}]" value="{{ email }}">
+                        <button id="{{ email }}1" data-email="{{ email }}">delete user</button>
+                    </a>
+                    {% endfor %}
+                    {% endif %}
+                </div>
+            </div>
+            <div class="inputCenter">
+                <input class="inputProjectSubmit" type="submit" value="Create Project">
+            </div>
+
+
+            <div class="blockForError">
+                <div class="errorStyle">{{ errors.inviteCreator|default(null) }}</div>
+                <div class="errorStyle">{{ errors.emailErrors|default(null) }}</div>
+            </div>
+
+            <input type="hidden" name="token" value="{{ csrf_token('project-create') }}"/>
+        </form>
+    </div>
+    <div>
+    </div>
+
 {% endblock %}
 
-{% block body %}
-      <div class="page page-task">
-        <div class="page-header">
-          <div class="container-fluid">
-            <h1>New project</h1>
-          </div>
-        </div>
-        <div class="page-content">
-          <div class="container-fluid">
-            <form action="#">
-              <div class="row">
-                <div class="col-md-4">
-                  <div class="form-group">
-                   <div class="form-group">
-                    <label>title</label>
-                    <input type="text" placeholder="Design for Home Page" class="form-control">
-                    </div>
-                    <label>description project</label>
-                    <textarea rows="3" class="form-control"></textarea>
-                  </div>
-                </div>
-                 <div class="col-md-4 mt-4 w-5">
-                  <div class="form-group">
-                    <div class="form-group">
-                    <div class="btn-group">
-                      <button type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        Add user
-                      </button>
-                          <div class="dropdown-menu ">
-                           <div class="adduser">
-                                <p class="dropdown-item">Name</p>
-                                <p class="dropdown-item">Namew</p>
-                                <p class="dropdown-item">Namee</p>
-                            </div>
-                          </div>
-                    </div>
-                  </div>
-                  <div class="adduserfield">
-                  <p class="textxbutton">Name<button type="button" class="xbutton">X</button></p>
-                  <p class="textxbutton">Name<button type="button" class="xbutton">X</button></p>
-                  <p class="textxbutton">Name<button type="button" class="xbutton">X</button></p>
-                  <p class="textxbutton">Name<button type="button" class="xbutton">X</button></p>
-                  <p class="textxbutton">Name<button type="button" class="xbutton">X</button></p>
-                  <p class="textxbutton">Name<button type="button" class="xbutton">X</button></p>
-                  <p class="textxbutton">Name<button type="button" class="xbutton">X</button></p>
-                  <p class="textxbutton">Name<button type="button" class="xbutton">X</button></p>
-                  <p class="textxbutton">Name<button type="button" class="xbutton">X</button></p>
-                  </div>
-                  </div>
-                  </div>
-                </div>
-                <div class="col-md-12">
-                  <div class="form-group text-center">
-                    <label>Task</label>
-                    <div class="taskfield">
-                        <p class="textxbutton">Name<button type="button" class="xbutton">X</button></p>
-                    </div>
-                  </div>
-                </div>
-                <div class="col-md-12">
-                  <div class="form-group text-center">
-                    <button type="submit" class="btn btn-accent">create project</button>
-                  </div>
-                </div>
-            </form>
-            </div>
-          </div>
-        </div>
- <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
-{% endblock %}
+{% block customJs %}
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script src="{{ asset('build/js/project.js') }}"></script>{% endblock %}

@@ -95,7 +95,7 @@ class ProjectRepository extends ServiceEntityRepository
 
         }
 
-        $pagination = $this->paginator->paginate($dbQuery, $page, 10);
+        $pagination = $this->paginator->paginate($dbQuery, $page, 15);
         return $pagination;
     }
 

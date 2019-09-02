@@ -7,8 +7,8 @@
         <div class="page page-contact">
             <div class="page-nav">
                 <div class="page-nav-inner">
-                    <a href="{{ path('project_create') }}" class="btn btn-accent hidden-xs">Add project</a>
                     <div class="group">
+                        <a href="{{ path('project_create') }}" class="btn btn-default">Create project</a>
                         <a href="{{ path('project_index') }}" class="btn btn-default">All projects</a>
                         <a href="{{ path('project_index', {'sortBy':'invited_to_projects'}) }}" class="btn btn-default">Projects I'm invited to</a>
                         <a href="{{ path('project_index', {'sortBy':'created_projects'}) }}" class="btn btn-default">My projects</a>

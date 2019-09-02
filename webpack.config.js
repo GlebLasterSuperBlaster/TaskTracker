@@ -11,6 +11,7 @@ Encore
     .addEntry('js/profile', './assets/js/profile.js')
     .addEntry('js/project', './assets/js/project.js')
     .addStyleEntry('css/style',['./assets/css/style.css'])
+    .addStyleEntry('css/style2',['./assets/css/style2.css'])
     .addStyleEntry('css/index',['./assets/css/index.css'])
     .addStyleEntry('css/registerpage',['./assets/css/registerpage.css'])
     .addStyleEntry('css/loginpage',['./assets/css/loginpage.css'])
