@@ -12,7 +12,7 @@
                         <input id="project_title" name="project[title]" class="inputProjectMenu" type="text"
                                placeholder="write Title" value="{{ project.title|default(null) }}">
                         <div class="blockForError">
-                            <div class="errorStyle">{{ errors.name|default(null) }}</div>
+                            <div class="errorStyle">{{ errors.title|default(null) }}</div>
                         </div>
                     </div>
                     <div class="projectDescription">

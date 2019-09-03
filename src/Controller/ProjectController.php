@@ -10,6 +10,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use Symfony\Component\Validator\ConstraintViolationList;
 use Symfony\Component\Validator\Validator\ValidatorInterface;
 
@@ -28,11 +29,16 @@ class ProjectController extends AbstractController
      * @var ValidatorInterface
      */
     private $validator;
+    /**
+     * @var UrlGeneratorInterface
+     */
+    private $urlGenerator;
 
-    public function __construct(EntityManagerInterface $manager, ValidatorInterface $validator)
+    public function __construct(EntityManagerInterface $manager, ValidatorInterface $validator, UrlGeneratorInterface $urlGenerator)
     {
         $this->dm = $manager;
         $this->validator = $validator;
+        $this->urlGenerator = $urlGenerator;
     }
 
 
@@ -45,7 +51,6 @@ class ProjectController extends AbstractController
     public function createAction(Request $request, TokenRandomizeService $token)
     {
         if ($request->getMethod() === 'POST') {
-            dump($request->request);
         }
 
         /**
@@ -68,7 +73,7 @@ class ProjectController extends AbstractController
                  */
                 $project = new Project();
                 $project->setCreatedBy($user);
-                $project->setName($request->request->get('project')['title']);
+                $project->setTitle($request->request->get('project')['title']);
                 $project->setDescription($request->request->get('project')['description']);
                 $project->setToken($token->generateToken());
                 if (isset($request->request->get('project')['user']) && $userEmails = $request->request->get('project')['user'])
@@ -96,7 +101,6 @@ class ProjectController extends AbstractController
                 }
 
                 $errorsAutoValid = $this->validator->validate($project);
-                dump($errorsAutoValid);
                 /**
                  * @var ConstraintViolationList $errorsAutoValid
                  */
@@ -105,13 +109,14 @@ class ProjectController extends AbstractController
                         $errors[$error->getPropertyPath()] = $error->getMessage();
                     }
                 }
-                dump($errors);
 
                 if ($errors === []) {
 
                     $this->dm->persist($project);
                     $this->dm->flush();
                     $primaryProject = null;
+
+                    return $this->redirectToRoute("main_page");
                 }
 
             }
@@ -120,6 +125,50 @@ class ProjectController extends AbstractController
             'errors' => $errors,
             'project' => $primaryProject
         ];
+    }
+
+    /**
+     * @Route("/view/{id}", name="project_view")
+     * @param Project $project
+     * @Template()
+     * @return array
+     */
+    public function  viewAction(Project $project)
+    {
+        $url = $this->generateUrl('join',
+            ['id' => $project->getId()],
+            UrlGeneratorInterface::ABSOLUTE_URL);
+
+        return [
+            'project' => $project,
+            'inviteUrl' => $url
+        ];
+    }
+
+    /**
+     * @Route("/join/{id}", name="join")
+     * @param Project $project
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse
+     */
+    public function inviteUser(Project $project)
+    {
+        if(!$this->getUser()) {
+            $this->addFlash(
+                'warning',
+                'You need to log in firstly to join the project');
+            return $this->redirectToRoute("main_page");
+        }
+        if ($project->getCreatedBy() !== $this->getUser())
+        {
+            $project->addInvitedUser($this->getUser());
+            $this->dm->persist($project);
+            $this->dm->flush();
+            $this->addFlash(
+                'success',
+                'You have joined the project!'
+            );
+        }
+        return $this->redirectToRoute('project_view', ['id' => $project->getId()]);
     }
 
     /**
