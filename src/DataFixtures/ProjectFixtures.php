@@ -43,7 +43,7 @@ class ProjectFixtures extends Fixture implements DependentFixtureInterface
             $time = new \DateTime('now' . '-' . $time . 'seconds');
             $user = $manager->getRepository(User::class)->findOneBy(['email' => $user_mail]);
             $user_inv = $manager->getRepository(User::class)->findOneBy(['email' => $inv_mail]);
-            $project->setName($name);
+            $project->setTitle($name);
             $project->setCreatedAtForFixtures(\DateTime::createFromFormat('Y-m-d H:i', (string) $time->format('Y-m-d H:i')));
             $project->setDescription($description);
             $project->setCreatedBy($user);

@@ -46,9 +46,10 @@ class UserController extends AbstractController
      * @Route("/register", name="register")
      * @Template()
      * @param Request $request
+     * @param TokenRandomizeService $token
      * @return array|\Symfony\Component\HttpFoundation\RedirectResponse
      */
-    public function registerAction(Request $request)
+    public function registerAction(Request $request, TokenRandomizeService $token)
     {
         $user = new User();
         $form = $this->createForm(UserType::class, $user);
@@ -62,6 +63,7 @@ class UserController extends AbstractController
             $user->setPassword($this->passwordEncoder->encodePassword($user, $password));
             $user->setName($request->request->get('user')['name']);
             $user->setRoles(['ROLE_USER']);
+            $user->setToken($token->generateToken());
             $this->dm->persist($user);
             $this->dm->flush();
 

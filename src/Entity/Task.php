@@ -6,6 +6,7 @@ use Doctrine\ORM\Mapping as ORM;
 
 /**
  * @ORM\Table(name="tasks")
+ * @ORM\HasLifecycleCallbacks()
  * @ORM\Entity(repositoryClass="App\Repository\TaskRepository")
  */
 class Task
@@ -31,7 +32,7 @@ class Task
      * @ORM\ManyToOne(targetEntity="App\Entity\TaskStatus")
      * @ORM\JoinColumn(nullable=false)
      */
-    private $status;
+    private $status ;
 
     /**
      * @ORM\ManyToOne(targetEntity="App\Entity\Project", inversedBy="tasks")
@@ -54,6 +55,8 @@ class Task
      * @ORM\Column(type="datetime")
      */
     private $createdAt;
+
+    private $createdAt2;
 
     /**
      * @ORM\Column(type="datetime", nullable=true)
@@ -143,15 +146,24 @@ class Task
     }
 
     /**
-     * @param \DateTimeInterface $createdAt
-     * @return Task
-     * @ORM\PrePersist()
+     * @ORM\PrePersist
      */
-    public function setCreatedAt(\DateTimeInterface $createdAt): self
+    public function setCreatedAt(): self
     {
-        $this->createdAt = $createdAt;
+        if(isset($this->createdAt2))
+            $this->createdAt = $this->createdAt2;
+        else
+            $this->createdAt = new \DateTime();
+        return $this;
+    }
+
+
+    public function setCreatedAtForFixtures($created_at): self
+    {
+        $this->createdAt2 = $created_at;
 
         return $this;
+
     }
 
     public function getUpdatedAt(): ?\DateTimeInterface
@@ -163,10 +175,11 @@ class Task
      * @param \DateTimeInterface|null $updatedAt
      * @return Task
      * @ORM\PreUpdate()
+     * @throws \Exception
      */
-    public function setUpdatedAt(?\DateTimeInterface $updatedAt): self
+    public function setUpdatedAt(): self
     {
-        $this->updatedAt = $updatedAt;
+        $this->updatedAt = new \DateTime();
 
         return $this;
     }

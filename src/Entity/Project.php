@@ -26,7 +26,7 @@ class Project
      * @ORM\Column(type="string", length=50)
      * @Assert\Length(min=3, minMessage="Min 3 symbols required for project title")
      */
-    private $name;
+    private $title;
 
     /**
      * @ORM\Column(type="text")
@@ -80,14 +80,14 @@ class Project
         return $this->id;
     }
 
-    public function getName(): ?string
+    public function getTitle(): ?string
     {
-        return $this->name;
+        return $this->title;
     }
 
-    public function setName(string $name): self
+    public function setTitle(string $title): self
     {
-        $this->name = $name;
+        $this->title = $title;
 
         return $this;
     }
@@ -190,10 +190,11 @@ class Project
      * @ORM\PreUpdate()
      * @param \DateTimeInterface|null $updatedAt
      * @return Project
+     * @throws \Exception
      */
-    public function setUpdatedAt(?\DateTimeInterface $updatedAt): self
+    public function setUpdatedAt(): self
     {
-        $this->updatedAt = $updatedAt;
+        $this->updatedAt = new \DateTime();
 
         return $this;
     }

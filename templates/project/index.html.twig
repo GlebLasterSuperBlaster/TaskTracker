@@ -19,7 +19,7 @@
                 <div class="container-fluid">
                     <div class="blocks">
                         {% for project in projects %}
-                            <a class="myblock" href="#">{{ project.name }} {{ project.createdAt|date }}
+                            <a class="myblock" href="{{ path('project_view', {'id' :  project.id }) }}">{{ project.title }} {{ project.createdAt|date }}
                                 {% if app.user == project.createdBy %}<img class="imagecrown" src="images/crown.png" alt="crown">{% endif %}
                             </a>
 

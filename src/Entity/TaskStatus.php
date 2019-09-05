@@ -10,9 +10,11 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class TaskStatus
 {
+    const NEW = "New";
+    const IN_PROGRESS = "In progress";
+    const DONE = "Done";
     /**
      * @ORM\Id()
-     * @ORM\GeneratedValue()
      * @ORM\Column(type="integer")
      */
     private $id;
@@ -37,5 +39,13 @@ class TaskStatus
         $this->title = $title;
 
         return $this;
+    }
+
+    /**
+     * @param mixed $id
+     */
+    public function setId($id): void
+    {
+        $this->id = $id;
     }
 }
