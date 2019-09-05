@@ -1,0 +1,80 @@
+{% extends 'base.html.twig' %}
+{% block customStylesheets %}
+    <link rel="stylesheet" href="{{ asset('build/css/project.css') }}"/>
+{% endblock %}
+{% block body %}
+    <div class="project">{{ project.title|default(null) }}</div>
+    <p>Created at {{ project.createdAt|date }} by
+        <a href="#">
+            {{ project.createdBy.name }} {{ project.createdBy.lastName }} ({{ project.createdBy.email }})
+        </a></p>
+    <div class="container">
+        <div class="containerLeftAndRight">
+            <div class="containerProjectAndTitle">
+
+                <div>
+                    <p>
+                        {{ project.description|default(null) }}
+                    </p>
+                </div>
+
+
+            </div>
+            <div id="app">
+
+                <h3>Users in project</h3>
+                {% if project and project.invitedUsers %}
+                    {% for user in project.invitedUsers %}
+                        <div><a href="#">
+                                {{ user.name }} {{ user.lastName }} ({{ user.email }})
+                            </a>
+                        </div>
+                    {% endfor %}
+                {% endif %}
+            </div>
+        </div>
+        <div class="inputCenter">
+            <a href="#">Edit project</a>
+            <a href="{{ path('task_create', {'id' : project.id }) }}">Create task</a>
+        </div>
+
+
+        <div>
+            {#            Тут див для тасков, я думаю, что имеет смысл сделать его таблицей с невидимой границей ячеек, чтобы это ровно выглядело#}
+            <h3>Tasks</h3>
+            {% if project and project.tasks %}
+                {% for task in project.tasks %}
+                    <div><a href="{{ path('task_view', {'id' : task.id}) }}">
+                            {{ task.title }} </a> {{ task.status.title }} created at {{ task.createdAt|date }}
+
+                        {% if task.executor and task.status.title is not same as ('Done') %}
+                            taken by
+                            <div><a href="#">
+                                    {{ task.executor.name }} {{ task.executor.lastName }} ({{ task.executor.email }})
+                                </a>
+                                <a href="{{ path('task_complete', {'id' : task.id}) }}">Complete task</a>
+                            </div>
+                        {% elseif task.status.title is same as ('Done') %}
+                        done by
+                        <div><a href="#">
+                                {{ task.executor.name }} {{ task.executor.lastName }} ({{ task.executor.email }})
+                            </a> at {{ task.updatedAt|date }}
+                            {% else %}
+                            <a href="{{ path('task_take', {'id' : task.id}) }}">Take task to work</a>
+                        {% endif %}
+                    </div>
+                {% endfor %}
+            {% endif %}
+        </div>
+    </div>
+    <h3>Invite link</h3>
+    <p>{{ inviteUrl }}</p>
+    <div>
+
+    </div>
+
+{% endblock %}
+
+{% block customJs %}
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script src="{{ asset('build/js/project.js') }}"></script>{% endblock %}
