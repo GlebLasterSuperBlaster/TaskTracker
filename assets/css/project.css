@@ -173,5 +173,10 @@
   width: 300px;
 }
 
+.errorStyle{
+  color: red;
+  font-size: 13px;
+  padding: 3px 0 3px 0;
+}
 
 

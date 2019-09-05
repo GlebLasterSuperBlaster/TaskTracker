@@ -1,10 +1,7 @@
 new Vue({
     el: '#app',
     delimiters: ['${', '}'],
-    data: {
-        social: 'test',
-    },
-
+    data: { },
     methods: {
         push:function(event){
     let inputId1 = document.getElementById("inputId1");
@@ -26,41 +23,32 @@ new Vue({
             div.append(link);
             link.append(input);
             link.append(button);
-         /*   let getButton = document.getElementsByClassName('deleteButton');
-            button.addEventListener('click', function(e){
+            button.onclick = function(e){
                 let target = e.target;
                 let data = target.getAttribute("data-email");
                 document.getElementById(data).remove();
                 document.getElementById(data+1).remove();
-            });*/
-
+            };
     input.value = value;
             event.preventDefault();
-},
-        deleteButtonClick:function(){
-            let getButton = document.querySelectorAll('containerInput');
-         for (let i =0; i < getButton.length; i++){
-             console.log(getButton[i])
-         }
+
+
+
+
         },
 
-
-/*deleteButton:function () {
-        let deleteButton = document.getElementsByClassName('deleteButton');
-        for (let i =0; i < deleteButton.length; i++){
-        deleteButton[i].addEventListener('click', function(e){
-        let target = e.target;
-        let data = target.getAttribute("data-email");
-        document.getElementById(data).remove();
-        document.getElementById(data+1).remove();
-        alert('test')
-    })}
-}*/
-
+        test: function (e) {
+            let target = e.target;
+            let data = target.getAttribute("data-email");
+            document.getElementById(data).remove();
+            document.getElementById(data+1).remove();
+        }
     },
-    created: function () {
+
+   /* created: function(){
         this.deleteButtonClick()
-    },
+    }*/
+
 });
 
 
