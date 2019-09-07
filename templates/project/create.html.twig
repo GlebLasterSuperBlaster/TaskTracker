@@ -28,27 +28,41 @@
 
 
                 </div>
+                <div class="containerForForm">
                 <div id="app">
-                    <input id="inputId1" type="text">
-
-                    <br/>
-                    <a href="#" v-on:click="push">Add user in project</a>
+                    <div class="forInputAndButton marginTopForInput">
+                    <input id="inputId1"  class="inputProjectMenuForUser" type="text">
+                    <div class="inputCenter">
+                    <button type="submit"  v-on:click="push"
+                            class="inputRegisterMenu inputRegisterMenuButton" value="Create account">Add user in project
+                    </button>
+                    </div>
+                    </div>
                     <div id="containerInput">
+
                     {% if project and project.user %}
                     {% for email in project.user %}
-                    <a href="#">
-                        <input id="{{ email }}" data-email="{{ email }}" name="project[user][{{ email }}]" value="{{ email }}">
-                        <button v-on:click="test" id="{{ email }}1" data-email="{{ email }}" class="deleteButton">delete user</button>
+                        <div class="forInputAndButton">
+                    <a href="#" class="LinkForInput">
+                        <input id="{{ email }}" data-email="{{ email }}" name="project[user][{{ email }}]" value="{{ email }}" class='inputProjectMenuForUser'>
                     </a>
+                        <button v-on:click="test" id="{{ email }}1" data-email="{{ email }}" class="deleteButton">delete user</button>
+
+                        </div>
                     {% endfor %}
                     {% endif %}
-                        <div class="blockForError">
-                            <div class="errorStyle">{{ errors.inviteCreator|default(null) }}</div>
-                            <div class="errorStyle">{{ errors.emailErrors|default(null) }}</div>
-                        </div>
+
+                    </div>
+
+                </div>
+                    <div class="blockForError">
+                        <div class="errorStyle">{{ errors.inviteCreator|default(null) }}</div>
+                        <div class="errorStyle">{{ errors.emailErrors|default(null) }}</div>
                     </div>
                 </div>
+
             </div>
+
             <div class="inputCenter">
                 <input class="inputProjectSubmit" type="submit" value="Create Project">
             </div>

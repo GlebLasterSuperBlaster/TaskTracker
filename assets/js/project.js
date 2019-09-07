@@ -8,11 +8,15 @@ new Vue({
             let div = document.getElementById("containerInput");
             let value = inputId1.value;
             inputId1.value= "";
+            let divForInpuT = document.createElement("div");
             let link = document.createElement("a");
             let input = document.createElement("input");
             let button = document.createElement("button");
+            divForInpuT.className = "forInputAndButton";
+            link.className ='LinkForInput';
             button.innerText = 'delete user';
             input.id = value;
+            input.className = 'inputProjectMenuForUser';
             button.id = value+1;
             button.className = 'deleteButton';
             // input.setAttribute("disabled" ,"disabled");
@@ -20,9 +24,12 @@ new Vue({
             input.setAttribute("type" ,'text');
             input.setAttribute("name" ,"project[user]["+value+"]");
             button.setAttribute("data-email" ,value);
-            div.append(link);
+            if (value != null && typeof value !== "undefined" && value !== "" ){
+                div.append(divForInpuT);
+                divForInpuT.append(link);
+                divForInpuT.append(button);
+            } else {console.log('empty')}
             link.append(input);
-            link.append(button);
             button.onclick = function(e){
                 let target = e.target;
                 let data = target.getAttribute("data-email");
