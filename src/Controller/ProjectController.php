@@ -50,9 +50,6 @@ class ProjectController extends AbstractController
      */
     public function createAction(Request $request, TokenRandomizeService $token)
     {
-        if ($request->getMethod() === 'POST') {
-        }
-
         /**
          * @var User $user
          */
@@ -109,7 +106,6 @@ class ProjectController extends AbstractController
                         $errors[$error->getPropertyPath()] = $error->getMessage();
                     }
                 }
-
                 if ($errors === []) {
 
                     $this->dm->persist($project);

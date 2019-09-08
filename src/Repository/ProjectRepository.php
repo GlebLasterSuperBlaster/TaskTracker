@@ -99,4 +99,17 @@ class ProjectRepository extends ServiceEntityRepository
         return $pagination;
     }
 
+    public function findAllByUser(int $userId)
+    {
+        $dbQuery = $this->createQueryBuilder('p')
+            ->leftJoin('p.createdBy', 'createdBy')
+            ->leftJoin('p.invitedUsers', 'invitedUsers')
+            ->andWhere('createdBy = (:val)')
+            ->orWhere('invitedUsers = (:val)')
+            ->setParameter('val', $userId)
+            ->orderBy('p.createdAt', 'DESC');
+
+        return $dbQuery->getQuery()->getResult();
+    }
+
 }

@@ -40,7 +40,7 @@
                     </div>
                     <div id="containerInput">
 
-                    {% if project and project.user %}
+                    {% if project and project.user is defined %}
                     {% for email in project.user %}
                         <div class="forInputAndButton">
                     <a href="#" class="LinkForInput">

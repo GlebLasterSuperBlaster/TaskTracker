@@ -2,7 +2,9 @@
 
 namespace App\Controller;
 
+use App\Entity\Project;
 use App\Entity\User;
+use App\Form\ChangePasswordType;
 use App\Form\UserType;
 use App\Services\TokenRandomizeService;
 use Doctrine\ORM\EntityManagerInterface;
@@ -10,6 +12,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use Symfony\Component\Security\Core\Authentication\Token\UsernamePasswordToken;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 use Symfony\Component\Validator\ConstraintViolationList;
@@ -105,6 +108,8 @@ class UserController extends AbstractController
         if (!$user) {
             return $this->redirectToRoute('main_page');
         }
+
+        $projects = $this->dm->getRepository(Project::class)->findAllByUser($user->getId());
         $errors = [];
 
 
@@ -148,7 +153,91 @@ class UserController extends AbstractController
 
         return [
             'user' => $user,
-            'errors' => $errors
+            'errors' => $errors,
+            'projects' => $projects
         ];
+    }
+
+    /**
+     * @Template()
+     * @Route("/restore_password/{token}", name="restore_password")
+     */
+    public function restorePassword(string $token, Request $request)
+    {
+        /**
+         * @var User $user
+         */
+        $user = $this->dm->getRepository(User::class)->findOneBy(['token' => $token]);
+
+        $form = $this->createForm(ChangePasswordType::class, $user);
+        $form->handleRequest($request);
+        $submittedToken = $request->request->get('token');
+
+        if ($this->isCsrfTokenValid('change-password', $submittedToken) && $form->isSubmitted() && $form->isValid()) {
+            $password = $request->request->get('change_password')['password']['first'];
+            $user->setPassword($this->passwordEncoder->encodePassword($user, $password));
+            $this->dm->persist($user);
+            $this->dm->flush();
+
+            $this->loginUserAutomatically($user, $password);
+            return $this->redirectToRoute('main_page');
+        }
+        return [
+            'form' => $form->createView()
+        ];
+
+    }
+
+    /**
+     * @Route("/forgot_password", name="forgot_password")
+     * @Template()
+     */
+    public function forgotPassword(Request $request, \Swift_Mailer $mailer)
+    {
+        if ($request->getMethod() == "POST") {
+            $submittedToken = $request->request->get('token');
+            dump($submittedToken);
+            if ($this->isCsrfTokenValid('forgot_password', $submittedToken)) {
+                $email = $request->request->get('user_email');
+                /**
+                 * @var User $user
+                 */
+                $user = $this->dm->getRepository(User::class)->findOneBy(['email' => $email]);
+                if ($user) {
+                    $url = $this->generateUrl('restore_password',
+                        ['token' => $user->getToken()],
+                        UrlGeneratorInterface::ABSOLUTE_URL);
+                    $message = (new \Swift_Message('Restore the password'))
+                        ->setFrom('gb.tasktracker@gmail.com')
+                        ->setTo($email)
+                        ->setBody(
+                            $this->renderView(
+                            // templates/emails/registration.html.twig
+                                'email/restore_password.html.twig',
+                                ['url' => $url,
+                                    'user' => $user]
+                            ),
+                            'text/html'
+                        );
+                    $mailer->send($message);
+                    $this->addFlash(
+                        'success',
+                        'The email with password restore instruction has benn sent to ' . $email
+                    );
+                    return $this->redirectToRoute('main_page');
+                    } else {
+                    $this->addFlash(
+                        'warning',
+                        'User with the email ' . $email . ' does not exist!'
+                    );
+                    return $this->redirectToRoute('forgot_password');
+                }
+
+
+            }
+        }
+
+
+
     }
 }
