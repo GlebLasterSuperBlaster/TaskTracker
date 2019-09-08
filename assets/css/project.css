@@ -90,10 +90,10 @@
 .inputProjectSubmit {
   width: 130px;
   height: 40px;
-  box-shadow: 0 3px 6px rgba(2, 136, 209, 0.5);
+  box-shadow: 0 3px 6px #f4f4f4;
   border-radius: 5px;
-  background-color: #03a9f4;
-  color: #ffffff;
+    background-color: #f4f4f4;
+    color: black;
   font-family: Roboto, serif;
   font-size: 13px;
   font-weight: 700;
@@ -102,8 +102,8 @@
 }
 
 .inputProjectSubmit:hover {
-  color: #03a9f4;
-  background-color: #ffffff;
+  color: #f4f4f4;
+  background-color: black;
 }
 
 .userListSelect{
@@ -134,7 +134,7 @@
 ::-webkit-scrollbar-thumb {
   -webkit-border-radius: 5px;
   border-radius: 5px;
-  background-color:#03a9f4;
+  background-color:#f4f4f4;
   box-shadow:0 1px 1px #fff inset;
   background-image:url('https://yraaa.ru/_pu/24/59610063.png');
   background-position:center;
@@ -194,10 +194,10 @@
 .inputRegisterMenuButton {
   width: 140px;
   height: 40px;
-  box-shadow: 0 3px 6px rgba(2, 136, 209, 0.5);
+  box-shadow: 0 3px 6px #f4f4f4;
   border-radius: 5px;
-  background-color: #03a9f4;
-  color: #ffffff;
+  background-color: #f4f4f4;
+  color: black;
   font-family: Roboto, serif;
   font-size: 13px;
   font-weight: 700;
@@ -209,8 +209,8 @@
 }
 
 .inputRegisterMenuButton:hover {
-  color: #03a9f4;
-  background-color: #ffffff;
+  color: #f4f4f4;
+  background-color: black;
 }
 
 .inputProjectMenuForUser{
@@ -224,13 +224,17 @@
   margin-right: 10px;
 }
 
+.inputProjectMenuForUser:focus{
+  color: black;
+}
+
 .deleteButton {
   width: 100px;
   height: 40px;
-  box-shadow: 0 3px 6px rgba(2, 136, 209, 0.5);
+  box-shadow: 0 3px 6px #f4f4f4;
   border-radius: 5px;
-  background-color: #03a9f4;
-  color: #ffffff;
+  background-color: #f4f4f4;
+  color: black;
   font-family: Roboto, serif;
   font-size: 13px;
   font-weight: 700;
@@ -242,18 +246,20 @@
 }
 
 .deleteButton:hover {
-  color: #03a9f4;
-  background-color: #ffffff;
+  color: #f4f4f4;
+  background-color: black;
 }
 
 .LinkForInput{
-
+  color: #666;
 }
 
 .LinkForInput:hover{
   text-decoration: none;
-
+    color: #666;
 }
+
+
 
 #app{
   overflow: auto;
