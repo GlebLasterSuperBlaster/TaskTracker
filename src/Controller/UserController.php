@@ -147,6 +147,11 @@ class UserController extends AbstractController
                     $user->setPassword($this->passwordEncoder->encodePassword($user, $password));
                     $this->dm->persist($user);
                     $this->dm->flush();
+
+                    $this->addFlash(
+                        'success',
+                        'Personal data has been updated successfully'
+                    );
                 }
             }
         }
