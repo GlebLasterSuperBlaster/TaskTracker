@@ -1,0 +1,47 @@
+{% extends 'base.html.twig' %}
+{% block customStylesheets %}
+    <link rel="stylesheet" href="{{ asset('build/css/project.css') }}"/>
+{% endblock %}
+{% block body %}
+    <div class="project">{{ task.title|default(null) }}</div>
+    <p>Created at {{ task.createdAt|date }} by
+        <a href="#">
+            {{ task.createdBy.name }} {{ task.createdBy.lastName }} ({{ task.createdBy.email }})
+        </a></p>
+    <div class="container">
+        <div class="containerLeftAndRight">
+            <div class="containerProjectAndTitle">
+                <div>
+                    <p>
+                        {{ task.description|default(null) }}
+                    </p>
+                </div>
+            </div>
+        </div>
+        <div><a href="{{ path('task_view', {'id' : task.id}) }}">
+                {{ task.title }} </a> {{ task.status.title }} created at {{ task.createdAt|date }}
+
+            {% if task.executor and task.status.title is not same as ('Done') %}
+            taken by
+            <div><a href="#">
+                    {{ task.executor.name }} {{ task.executor.lastName }} ({{ task.executor.email }})
+                </a>
+                <a href="{{ path('task_complete', {'id' : task.id}) }}">Complete task</a>
+            </div>
+            {% elseif task.status.title is same as ('Done') %}
+            done by
+            <div><a href="#">
+                    {{ task.executor.name }} {{ task.executor.lastName }} ({{ task.executor.email }})
+                </a> at {{ task.updatedAt|date }}
+                {% else %}
+                    <a href="{{ path('task_take', {'id' : task.id}) }}">Take task to work</a>
+                {% endif %}
+            </div>
+
+    </div>
+
+{% endblock %}
+
+{% block customJs %}
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script src="{{ asset('build/js/project.js') }}"></script>{% endblock %}

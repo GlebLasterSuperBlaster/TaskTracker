@@ -1,0 +1,91 @@
+{% extends 'base.html.twig' %}
+{% block customStylesheets %}
+    <link rel="stylesheet" href="{{ asset('build/css/projectupdate.css') }}"/>
+{% endblock %}
+{% block body %}
+    <div class="project">New Project</div>
+    <div class="container">
+        <form action="#">
+            <div class="containerLeftAndRight">
+                <div class="containerProjectAndTitle">
+                    <div class="projectTitle"><label class="labelProjectInput" for="project_title">Title</label><input
+                                id="project_title" name="project_title"
+                                class="inputProjectMenu" type="text" placeholder="write Title"></div>
+                    <div class="projectDescription"><label class="labelProjectInput"
+                                                           for="project_description">Description</label>
+                        <textarea name="project_description" id="project_description" class="projectDescriptionTextArea"
+                                  cols="30" rows="10" placeholder="Description Project"></textarea></div>
+
+                </div>
+                <div class="userList">
+                    <label class="labelProjectInput" for="userListSelect">User List</label>
+                    <div class="borderUserList">
+                        <select name="userListSelect" id="userListSelect" class="userListSelect">
+                            <option> User1</option>
+                            <option> User2</option>
+                            <option> User3</option>
+                        </select>
+                        <div class="userListLink">
+                            <div class="userLinkMargin"><a href="#" class="taskAndProjectLink">Lorem ipsum dolor sit
+                                    amet.</a>
+                                <button class="buttonMargin"><i class="fas fa-user-minus"></i>
+                                </button>
+                            </div>
+                            <div class="userLinkMargin"><a href="#" class="taskAndProjectLink">Lorem ipsum dolor sit
+                                    amet.</a>
+                                <button class="buttonMargin"><i class="fas fa-user-minus"></i>
+                                </button>
+                            </div>
+                            <div class="userLinkMargin"><a href="#" class="taskAndProjectLink">Lorem ipsum dolor sit
+                                    amet.</a>
+                                <button class="buttonMargin"><i class="fas fa-user-minus"></i>
+                                </button>
+                            </div>
+                            <div class="userLinkMargin"><a href="#" class="taskAndProjectLink">Lorem ipsum dolor sit
+                                    amet.</a>
+                                <button class="buttonMargin"><i class="fas fa-user-minus"></i>
+                                </button>
+                            </div>
+                            <div class="userLinkMargin"><a href="#" class="taskAndProjectLink">Lorem ipsum dolor sit
+                                    amet.</a>
+                                <button class="buttonMargin"><i class="fas fa-user-minus"></i>
+                                </button>
+                            </div>
+                            <div class="userLinkMargin"><a href="#" class="taskAndProjectLink">Lorem ipsum dolor sit
+                                    amet.</a>
+                                <button class="buttonMargin"><i class="fas fa-user-minus"></i>
+                                </button>
+                            </div>
+                            <div class="userLinkMargin"><a href="#" class="taskAndProjectLink">Lorem ipsum dolor sit
+                                    amet.</a>
+                                <button class="buttonMargin"><i class="fas fa-user-minus"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="tasks">
+                <label for="taskInput">Tasks</label>
+                <div class="tasksCenter">
+                <input type="text" placeholder="write your task" id="taskInput">
+                <ol>
+                    <li>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Doloremque, ipsam!</li>
+                    <li>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Doloremque, ipsam!</li>
+                    <li>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Doloremque, ipsam!</li>
+                    <li>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Doloremque, ipsam!</li>
+                </ol>
+            </div>
+            </div>
+            <div class="inputCenter">
+                <input class="inputProjectSubmit" type="submit" value="Update Project">
+            </div>
+        </form>
+    </div>
+    <div>
+    </div>
+{% endblock %}
+
+{% block customJs %}
+    {# <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+     <script src="{{ asset('build/js/project.js') }}"></script>#}{% endblock %}

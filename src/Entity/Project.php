@@ -2,9 +2,14 @@
 
 namespace App\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
+ * @ORM\Table(name="projects")
+ * @ORM\HasLifecycleCallbacks()
  * @ORM\Entity(repositoryClass="App\Repository\ProjectRepository")
  */
 class Project
@@ -17,43 +22,72 @@ class Project
     private $id;
 
     /**
+     * @Assert\NotBlank(message="Please input project title")
      * @ORM\Column(type="string", length=50)
+     * @Assert\Length(min=3, minMessage="Min 3 symbols required for project title")
      */
-    private $name;
+    private $title;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="text")
+     * @Assert\NotBlank(message="Please input project description")
+     * @Assert\Length(min=5, minMessage="Min 5 symbols required for project description")
      */
     private $description;
 
     /**
-     * @ORM\Column(type="integer")
-     */
-    private $category;
-
-    /**
      * @ORM\Column(type="datetime")
      */
-    private $date;
+    private $createdAt;
+
+    private $createdAt2;
 
     /**
-     * @ORM\Column(type="integer")
+     * @ORM\ManyToOne(targetEntity="App\Entity\User", inversedBy="createdProjects")
      */
-    private $invite;
+    private $createdBy;
+
+    /**
+     * @ORM\Column(type="datetime", nullable=true)
+     */
+    private $updatedAt;
+
+    /**
+     * @ORM\ManyToMany(targetEntity="App\Entity\User", inversedBy="projectsInvitedTo")
+     */
+    private $invitedUsers;
+
+    /**
+     * @ORM\Column(type="string", length=40)
+     */
+    private $token;
+
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\Task", mappedBy="project", orphanRemoval=true)
+     */
+    private $tasks;
+
+    public function __construct()
+    {
+
+        $this->invitedUsers = new ArrayCollection();
+        $this->tasks = new ArrayCollection();
+    }
+
 
     public function getId(): ?int
     {
         return $this->id;
     }
 
-    public function getName(): ?string
+    public function getTitle(): ?string
     {
-        return $this->name;
+        return $this->title;
     }
 
-    public function setName(string $name): self
+    public function setTitle(string $title): self
     {
-        $this->name = $name;
+        $this->title = $title;
 
         return $this;
     }
@@ -70,38 +104,134 @@ class Project
         return $this;
     }
 
-    public function getCategory(): ?int
+    public function getCreatedAt(): ?\DateTimeInterface
     {
-        return $this->category;
+        return $this->createdAt;
     }
 
-    public function setCategory(int $category): self
+
+    /**
+     * @ORM\PrePersist
+     */
+    public function setCreatedAt(): self
     {
-        $this->category = $category;
+        if(isset($this->createdAt2))
+            $this->createdAt = $this->createdAt2;
+        else
+            $this->createdAt = new \DateTime();
+        return $this;
+    }
+
+
+    public function setCreatedAtForFixtures($created_at): self
+    {
+        $this->createdAt2 = $created_at;
+
+        return $this;
+
+    }
+
+    public function getCreatedBy(): ?User
+    {
+        return $this->createdBy;
+    }
+
+    public function setCreatedBy(?User $createdBy): self
+    {
+        $this->createdBy = $createdBy;
 
         return $this;
     }
 
-    public function getDate(): ?\DateTimeInterface
+    /**
+     * @return Collection|User[]
+     */
+    public function getInvitedUsers(): Collection
     {
-        return $this->date;
+        return $this->invitedUsers;
     }
 
-    public function setDate(\DateTimeInterface $date): self
+    public function addInvitedUser(User $invitedUser): self
     {
-        $this->date = $date;
+        if (!$this->invitedUsers->contains($invitedUser)) {
+            $this->invitedUsers[] = $invitedUser;
+        }
 
         return $this;
     }
 
-    public function getInvite(): ?int
+    public function removeInvitedUser(User $invitedUser): self
     {
-        return $this->invite;
+        if ($this->invitedUsers->contains($invitedUser)) {
+            $this->invitedUsers->removeElement($invitedUser);
+        }
+        return $this;
     }
 
-    public function setInvite(int $invite): self
+    public function getToken(): ?string
     {
-        $this->invite = $invite;
+        return $this->token;
+    }
+
+    public function setToken(string $token): self
+    {
+        $this->token = $token;
+
+        return $this;
+    }
+
+
+    public function getUpdatedAt(): ?\DateTimeInterface
+    {
+        return $this->updatedAt;
+    }
+
+    /**
+     * @ORM\PreUpdate()
+     * @param \DateTimeInterface|null $updatedAt
+     * @return Project
+     * @throws \Exception
+     */
+    public function setUpdatedAt(): self
+    {
+        $this->updatedAt = new \DateTime();
+
+        return $this;
+    }
+
+
+    public function getAllProjects()
+    {
+
+    }
+
+    /**
+     * @return Collection|Task[]
+     */
+    public function getTasks(): Collection
+    {
+        return $this->tasks;
+    }
+
+    public function addTask(Task $task): self
+    {
+        if (!$this->tasks->contains($task)) {
+            $this->tasks[] = $task;
+            $task->setProject($this);
+        }
+
+        return $this;
+    }
+
+    public function removeTask(Task $task): self
+    {
+        if ($this->tasks->contains($task)) {
+            $this->tasks->removeElement($task);
+            // set the owning side to null (unless already changed)
+            if ($task->getProject() === $this) {
+                $task->setProject(null);
+            }
+        }
 
         return $this;
     }
