@@ -227,7 +227,7 @@ class UserController extends AbstractController
                     $mailer->send($message);
                     $this->addFlash(
                         'success',
-                        'The email with password restore instruction has benn sent to ' . $email
+                        'The email with password restore instruction has been sent to ' . $email
                     );
                     return $this->redirectToRoute('main_page');
                     } else {
