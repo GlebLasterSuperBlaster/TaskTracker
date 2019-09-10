@@ -10,6 +10,7 @@ Encore
     .addEntry('js/index', './assets/js/index.js')
     .addEntry('js/profile', './assets/js/profile.js')
     .addEntry('js/project', './assets/js/project.js')
+    .addEntry('js/viewproject', './assets/js/viewproject.js')
     .addStyleEntry('css/style',['./assets/css/style.css'])
     .addStyleEntry('css/style2',['./assets/css/style2.css'])
     .addStyleEntry('css/index',['./assets/css/index.css'])
@@ -18,6 +19,7 @@ Encore
     .addStyleEntry('css/project',['./assets/css/project.css'])
     .addStyleEntry('css/projectupdate',['./assets/css/projectupdate.css'])
     .addStyleEntry('css/profile',['./assets/css/profile.css'])
+    .addStyleEntry('css/projectview',['./assets/css/projectview.css'])
 
     .enableSassLoader()
 

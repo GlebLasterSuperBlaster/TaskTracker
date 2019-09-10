@@ -39,7 +39,8 @@
   font-weight: 700;
   margin-left: 170px;
   transition: 2s;
-  padding-left: 18px;
+  display: flex;
+  justify-content: center;
 }
 
 .labelRegisterMenu {

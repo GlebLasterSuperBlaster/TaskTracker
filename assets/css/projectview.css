@@ -5,6 +5,8 @@
   justify-content: space-between;
   align-items: center;
   flex: 1 0 auto;
+  flex-direction: column;
+  width: 1600px;
 }
 
 .project {
@@ -19,6 +21,7 @@
   align-items: center;
   justify-content: center;
   padding: 25px 0 25px 0;
+  flex-direction: column;
 }
 
 .inputProjectMenu {
@@ -27,7 +30,6 @@
   border-radius: 5px;
   border: 2px solid #dddddd;
   background-color: white;
-  padding-left: 10px;
   display: flex;
   margin-bottom: 10px;
 }
@@ -71,6 +73,7 @@
 
 .taskAndProjectLink{
   text-decoration: none;
+  border-bottom: 1px dashed #212121;
   color: #212121;
   font-family: Roboto, serif;
   font-size: 16px;
@@ -155,7 +158,7 @@
   display: flex;
   flex-direction: row;
   justify-content: space-around;
-  width: 850px;
+  width: 100%;
 }
 
 .inputCenter{
@@ -164,16 +167,24 @@
 }
 
 .containerProjectAndTitle{
-  width: 40%;
-  margin-left: 52px;
+  display: flex;
+  flex-direction: row;
+  height: 300px;
+  justify-content: space-between;
+  width: 60%;
 }
 
-#app{
+.userDiv{
   display: flex;
   flex-direction: column;
-  width: 300px;
-
+  overflow: auto;
+  height: 300px;
+  border-radius: 5px;
+  border: 2px solid #dddddd;
+  background-color: white;
+  width: 45%;
 }
+
 
 .errorStyle{
   color: red;
@@ -187,7 +198,6 @@
   border-radius: 5px;
   border: 2px solid #dddddd;
   background-color: white;
-  padding-left: 10px;
   display: flex;
 }
 
@@ -202,15 +212,16 @@
   font-size: 13px;
   font-weight: 700;
   transition: 2s;
-  text-align: center;
   display: flex;
   justify-content: center;
-  margin-bottom: 20px;
+  align-items: center;
+  margin-top: 20px;
 }
 
 .inputRegisterMenuButton:hover {
   color: #f4f4f4;
   background-color: black;
+  text-decoration: none;
 }
 
 .inputProjectMenuForUser{
@@ -260,17 +271,6 @@
 }
 
 
-
-#app{
-  overflow: auto;
-  height: 300px;
-  width: 400px;
-    border-radius: 5px;
-    border: 2px solid #dddddd;
-    background-color: white;
-
-}
-
 .forInputAndButton{
   display: flex;
   flex-direction: row;
@@ -284,4 +284,169 @@
 .containerForForm{
   margin-top: 25px;
   margin-left: 20px;
+}
+
+.inviteInProject{
+  display: flex;
+  flex-direction: column;
+  color: #212121;
+  font-family: Roboto, serif;
+  font-size: 16px;
+  font-weight: 400;
+}
+
+.inviteProjectLink{
+  text-decoration: none;
+  border-bottom: 1px dashed #212121;
+  margin-left: 10px;
+  color: #212121;
+}
+
+.inviteProjectLink:hover,.inviteProjectLink:focus{
+  color: #212121;
+  text-decoration: none;
+}
+
+.inviteProjectLink:visited{
+  color: #212121;
+}
+
+.textAndLindInvite{
+  display: flex;
+  flex-direction: row;
+}
+
+.taskContainer{
+  display: flex;
+  flex-direction: column;
+}
+
+.taskDirection{
+  margin-bottom: 10px;
+  width: 100%;
+  padding: 0 10px 0 10px;
+
+}
+
+.containerForTask{
+  overflow:auto;
+  height: 300px;
+  border-radius: 5px;
+  border: 2px solid #dddddd;
+  background-color: white;
+  width: 70%;
+}
+
+.description{
+  border-radius: 5px;
+  border: 2px solid #dddddd;
+  background-color: white;
+  overflow: auto;
+  height: 300px;
+  width: 45%;
+  display: flex;
+  flex-direction: column;
+}
+
+.textProejctAndTask {
+  color: #212121;
+  font-family: Roboto, serif;
+  font-size: 20px;
+  font-weight: 500;
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+}
+
+.usersListDirection{
+  display: flex;
+  justify-content: center;
+  padding: 0 10px 0 10px;
+  margin-bottom: 10px;
+}
+
+.descriptionText{
+  display: flex;
+  justify-content: center;
+  color: #212121;
+  font-family: Roboto, serif;
+  font-size: 16px;
+  font-weight: 400;
+  padding: 0 10px 0 10px;
+}
+
+.titleProjectLink{
+  text-decoration: none;
+  border-bottom: 1px dashed #212121;
+  color: #212121;
+  font-family: Roboto, serif;
+}
+
+.titleProjectLink:hover,.titleProjectLink:focus{
+  color: #212121;
+  text-decoration: none;
+}
+
+.modal-mask {
+  position: fixed;
+  z-index: 9998;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, .5);
+  display: table;
+  transition: opacity .3s ease;
+}
+
+.modal-wrapper {
+  display: table-cell;
+  vertical-align: middle;
+}
+
+.modal-container {
+  width: 300px;
+  margin: 0px auto;
+  padding: 20px 30px;
+  background-color: #fff;
+  border-radius: 2px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, .33);
+  transition: all .3s ease;
+  font-family: Helvetica, Arial, sans-serif;
+}
+
+.modal-header h3 {
+  margin-top: 0;
+  color: #42b983;
+}
+
+.modal-body {
+  margin: 20px 0;
+}
+
+.modal-default-button {
+  float: right;
+}
+
+/*
+ * The following styles are auto-applied to elements with
+ * transition="modal" when their visibility is toggled
+ * by Vue.js.
+ *
+ * You can easily play with the modal transition by editing
+ * these styles.
+ */
+
+.modal-enter {
+  opacity: 0;
+}
+
+.modal-leave-active {
+  opacity: 0;
+}
+
+.modal-enter .modal-container,
+.modal-leave-active .modal-container {
+  -webkit-transform: scale(1.1);
+  transform: scale(1.1);
 }

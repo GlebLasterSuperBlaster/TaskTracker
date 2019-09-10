@@ -1,80 +1,156 @@
 {% extends 'base.html.twig' %}
 {% block customStylesheets %}
-    <link rel="stylesheet" href="{{ asset('build/css/project.css') }}"/>
+    <link rel="stylesheet" href="{{ asset('build/css/projectview.css') }}"/>
 {% endblock %}
 {% block body %}
-    <div class="project">{{ project.title|default(null) }}</div>
-    <p>Created at {{ project.createdAt|date }} by
-        <a href="#">
-            {{ project.createdBy.name }} {{ project.createdBy.lastName }} ({{ project.createdBy.email }})
-        </a></p>
+    <div class="project">{{ project.title|default(null) }}
+        <p>Created at {{ project.createdAt|date("m/d/Y") }} by
+            <a href="#" class="titleProjectLink">
+                {{ project.createdBy.name }} {{ project.createdBy.lastName }} ({{ project.createdBy.email }})
+            </a></p>
+    </div>
+
     <div class="container">
         <div class="containerLeftAndRight">
             <div class="containerProjectAndTitle">
 
-                <div>
-                    <p>
-                        {{ project.description|default(null) }}
-                    </p>
+
+                <div class="description">
+                    <p class="textProejctAndTask">Description</p>
+                   <div class="descriptionText"> {{ project.description|default(null) }}
+                   </div>
                 </div>
 
 
-            </div>
-            <div id="app">
+                <div class="userDiv">
 
-                <h3>Users in project</h3>
-                {% if project and project.invitedUsers %}
-                    {% for user in project.invitedUsers %}
-                        <div><a href="#">
-                                {{ user.name }} {{ user.lastName }} ({{ user.email }})
-                            </a>
-                        </div>
-                    {% endfor %}
-                {% endif %}
-            </div>
-        </div>
-        <div class="inputCenter">
-            <a href="#">Edit project</a>
-            <a href="{{ path('task_create', {'id' : project.id }) }}">Create task</a>
-        </div>
-
-
-        <div>
-            {#            Тут див для тасков, я думаю, что имеет смысл сделать его таблицей с невидимой границей ячеек, чтобы это ровно выглядело#}
-            <h3>Tasks</h3>
-            {% if project and project.tasks %}
-                {% for task in project.tasks %}
-                    <div><a href="{{ path('task_view', {'id' : task.id}) }}">
-                            {{ task.title }} </a> {{ task.status.title }} created at {{ task.createdAt|date }}
-
-                        {% if task.executor and task.status.title is not same as ('Done') %}
-                            taken by
-                            <div><a href="#">
-                                    {{ task.executor.name }} {{ task.executor.lastName }} ({{ task.executor.email }})
+                    <p class="textProejctAndTask">Users in project</p>
+                    {% if project and project.invitedUsers %}
+                        {% for user in project.invitedUsers %}
+                            <div class="usersListDirection"><a href="#" class="taskAndProjectLink">
+                                    {{ user.name }} {{ user.lastName }} ({{ user.email }})
                                 </a>
-                                <a href="{{ path('task_complete', {'id' : task.id}) }}">Complete task</a>
                             </div>
-                        {% elseif task.status.title is same as ('Done') %}
-                        done by
-                        <div><a href="#">
-                                {{ task.executor.name }} {{ task.executor.lastName }} ({{ task.executor.email }})
-                            </a> at {{ task.updatedAt|date }}
-                            {% else %}
-                            <a href="{{ path('task_take', {'id' : task.id}) }}">Take task to work</a>
-                        {% endif %}
-                    </div>
-                {% endfor %}
-            {% endif %}
+                        {% endfor %}
+                    {% endif %}
+                </div>
+                <div>
+                </div>
+            </div>
+            <div class="containerForTask" id="app">
+                <div class="inputCenter">
+
+                    <a href="{{ path('task_create', {'id' : project.id }) }}"
+                       class="inputRegisterMenu inputRegisterMenuButton">Create task</a>
+                </div>
+
+
+                {#            Тут див для тасков, я думаю, что имеет смысл сделать его таблицей с невидимой границей ячеек, чтобы это ровно выглядело#}
+                <p class="textProejctAndTask">Tasks</p>
+                <div class="taskContainer">
+
+                    {% if project and project.tasks %}
+                        {% for task in project.tasks %}
+                            <div class="taskDirection">
+                                <a href="{{ path('task_view', {'id' : task.id}) }}" class="taskAndProjectLink" id="show-modal" @click="showModal = true" onclick="event.preventDefault()">
+                                    {{ task.title }} </a> {{ task.status.title }} created
+                                at {{ task.createdAt|date("m/d/Y H:i") }}
+
+                                {% if task.executor and task.status.title is not same as ('Done') %}
+                                    taken by
+                                    <a href="#" class="taskAndProjectLink">
+                                        {{ task.executor.name }} {{ task.executor.lastName }} ({{ task.executor.email }}
+                                        )
+                                    </a>
+                                    <a href="{{ path('task_complete', {'id' : task.id}) }}" title="Complete task"><i
+                                                class="fas fa-check-square"></i>
+                                    </a>
+
+                                {% elseif task.status.title is same as ('Done') %}
+                                    done by
+
+                                    <a href="#" class="taskAndProjectLink">
+                                        {{ task.executor.name }} {{ task.executor.lastName }} ({{ task.executor.email }}
+                                        )
+                                    </a> at {{ task.updatedAt|date("m/d/Y H:i") }}
+                                {% else %}
+                                    <a href="{{ path('task_take', {'id' : task.id}) }}" title="Take to work"><i
+                                                class="far fa-hand-point-right"></i></a>
+                                {% endif %}
+                            </div>
+                        {% endfor %}
+                    {% endif %}
+
+                    <modal v-if="showModal" @close="showModal = false">
+                        <!--
+                          you can use custom content here to overwrite
+                          default content
+                        -->
+                        <h3 slot="header">custom header</h3>
+                    </modal>
+                </div>
+
+            </div>
+
+
+        </div>
+        <div class="inviteInProject">
+            <div class="textAndLindInvite">
+           Invite link <a class="inviteProjectLink" href="{{ inviteUrl }}">{{ inviteUrl }}</a></div>
+            <div class="inputCenter">
+                <a href="#"
+                   class="inputRegisterMenu inputRegisterMenuButton">Edit project</a>
+            </div>
         </div>
     </div>
-    <h3>Invite link</h3>
-    <p>{{ inviteUrl }}</p>
-    <div>
 
-    </div>
+    <script type="text/x-template" id="modal-template">
+        <transition name="modal">
+            <div class="modal-mask">
+                <div class="modal-wrapper">
+                    <div class="modal-container">
+
+                        <div class="modal-header">
+                            <slot name="header">
+                                default header
+                            </slot>
+                        </div>
+
+                        <div class="modal-body">
+                            <slot name="body">
+                                default body
+                            </slot>
+                        </div>
+
+                        <div class="modal-footer">
+                            <slot name="footer">
+                                default footer
+                                <button class="modal-default-button" @click="$emit('close')">
+                                    OK
+                                </button>
+                            </slot>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </transition>
+    </script>
+
+    <!-- app -->
+  {#  <div id="app">
+        <button id="show-modal" @click="showModal = true">Show Modal</button>
+        <!-- use the modal component, pass in the prop -->
+        <modal v-if="showModal" @close="showModal = false">
+            <!--
+              you can use custom content here to overwrite
+              default content
+            -->
+            <h3 slot="header">custom header</h3>
+        </modal>
+    </div>#}
 
 {% endblock %}
 
 {% block customJs %}
     <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
-    <script src="{{ asset('build/js/project.js') }}"></script>{% endblock %}
+    <script src="{{ asset('build/js/viewproject.js') }}"></script>{% endblock %}
