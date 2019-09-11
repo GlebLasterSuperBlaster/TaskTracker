@@ -147,6 +147,11 @@ class UserController extends AbstractController
                     $user->setPassword($this->passwordEncoder->encodePassword($user, $password));
                     $this->dm->persist($user);
                     $this->dm->flush();
+
+                    $this->addFlash(
+                        'success',
+                        'Personal data has been updated successfully'
+                    );
                 }
             }
         }
@@ -222,7 +227,7 @@ class UserController extends AbstractController
                     $mailer->send($message);
                     $this->addFlash(
                         'success',
-                        'The email with password restore instruction has benn sent to ' . $email
+                        'The email with password restore instruction has been sent to ' . $email
                     );
                     return $this->redirectToRoute('main_page');
                     } else {
