@@ -187,12 +187,12 @@ class Task
     public function toArray()
     {
         return [
-          'title' => $this->getTitle(),
-          'description' => $this->getDescription(),
-          'status' => $this->getStatus()->getTitle(),
-          'executor' => $this->getExecutor()->toArray(),
-          'createdAt' => $this->getCreatedAt()->format('m/d/Y H:i'),
-          'updatedAt' => $this->getUpdatedAt()->format('m/d/Y H:i'),
+            'title' => $this->getTitle(),
+            'description' => $this->getDescription(),
+            'status' => $this->getStatus()->getTitle(),
+            'executor' => $this->getExecutor() ? $this->getExecutor()->toArray() : null,
+            'createdAt' => $this->getCreatedAt()->format('m/d/Y H:i'),
+            'updatedAt' => $this->getUpdatedAt() ? $this->getUpdatedAt()->format('m/d/Y H:i') : null,
         ];
     }
 }

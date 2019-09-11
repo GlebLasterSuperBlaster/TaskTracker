@@ -52,7 +52,7 @@
                     {% if project and project.tasks %}
                         {% for task in project.tasks %}
                             <div class="taskDirection">
-                                <a href="{{ path('task_view', {'id' : task.id}) }}" class="taskAndProjectLink" id="show-modal" @click="showModal = true" >
+                                <a href="{{ path('task_view', {'id' : task.id}) }}" class="taskAndProjectLink" id="show-modal" @click="showModal = true" onclick="event.preventDefault()" v-on:click="getLink">
                                     {{ task.title }} </a> {{ task.status.title }} created
                                 at {{ task.createdAt|date("m/d/Y H:i") }}
 
@@ -86,8 +86,11 @@
                           you can use custom content here to overwrite
                           default content
                         -->
-                        <h3 slot="header">custom header</h3>
+                        <div slot="body" id="divTaskTitle"><input id="inputTaskTitle" type="text" >  ${info.title} </div>
+                        <div slot="header">  ${info.description}</div>
+                        <div slot="footer">   ${info.status}</div>
                     </modal>
+
                 </div>
 
             </div>
@@ -116,19 +119,20 @@
                             </slot>
                         </div>
 
-                        <div class="modal-body">
+                        <div class="modal-body"  >
                             <slot name="body">
-                                default body
+
                             </slot>
                         </div>
 
                         <div class="modal-footer">
                             <slot name="footer">
                                 default footer
-                                <button class="modal-default-button" @click="$emit('close')">
-                                    OK
-                                </button>
+
                             </slot>
+                            <button class="modal-default-button" @click="$emit('close')">
+                                <i class="fas fa-window-close"></i>
+                            </button>
                         </div>
                     </div>
                 </div>
