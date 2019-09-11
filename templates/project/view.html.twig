@@ -52,7 +52,7 @@
                     {% if project and project.tasks %}
                         {% for task in project.tasks %}
                             <div class="taskDirection">
-                                <a href="{{ path('task_view', {'id' : task.id}) }}" class="taskAndProjectLink" id="show-modal" @click="showModal = true" onclick="event.preventDefault()">
+                                <a href="{{ path('task_view', {'id' : task.id}) }}" class="taskAndProjectLink" id="show-modal" @click="showModal = true" >
                                     {{ task.title }} </a> {{ task.status.title }} created
                                 at {{ task.createdAt|date("m/d/Y H:i") }}
 
