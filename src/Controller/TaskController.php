@@ -10,6 +10,7 @@ use App\Form\TaskType;
 use Doctrine\ORM\EntityManagerInterface;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 
@@ -81,12 +82,11 @@ class TaskController extends AbstractController
      * @Route("/view/{id}", name="task_view")
      * @param Task $task
      * @Template()
+     * @return JsonResponse
      */
     public function viewAction(Task $task)
     {
-        return [
-            'task' => $task
-        ];
+        return  new JsonResponse(['task' => $task->toArray()]);
     }
 
     /**
