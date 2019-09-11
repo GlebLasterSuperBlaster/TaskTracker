@@ -27,10 +27,14 @@ new Vue({
                  .then(response => (this.info = response.data.task));
 },
         inputcontent:function () {
-            let div = document.getElementById("divTaskTitle");
-            let input = document.getElementById("inputTaskTitle");
-            let divContent = div.innerText;
-            input.value = divContent
+            let divTitle = document.getElementById("divTaskTitle");
+            let inputTitle = document.getElementById("inputTaskTitle");
+            let divDescription = document.getElementById("divTaskDescription");
+            let inputDescription = document.getElementById("inputTaskDescription");
+            let divContentTitle = divTitle.innerText;
+            let divContentDescription = divDescription.innerText;
+            inputTitle.value = divContentTitle;
+            inputDescription.value = divContentDescription;
 
         }
     },

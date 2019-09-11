@@ -17,8 +17,8 @@
 
                 <div class="description">
                     <p class="textProejctAndTask">Description</p>
-                   <div class="descriptionText"> {{ project.description|default(null) }}
-                   </div>
+                    <div class="descriptionText"> {{ project.description|default(null) }}
+                    </div>
                 </div>
 
 
@@ -52,7 +52,9 @@
                     {% if project and project.tasks %}
                         {% for task in project.tasks %}
                             <div class="taskDirection">
-                                <a href="{{ path('task_view', {'id' : task.id}) }}" class="taskAndProjectLink" id="show-modal" @click="showModal = true" onclick="event.preventDefault()" v-on:click="getLink">
+                                <a href="{{ path('task_view', {'id' : task.id}) }}" class="taskAndProjectLink"
+                                   id="show-modal" @click="showModal = true" onclick="event.preventDefault()"
+                                   v-on:click="getLink">
                                     {{ task.title }} </a> {{ task.status.title }} created
                                 at {{ task.createdAt|date("m/d/Y H:i") }}
 
@@ -82,13 +84,17 @@
                     {% endif %}
 
                     <modal v-if="showModal" @close="showModal = false">
-                        <!--
-                          you can use custom content here to overwrite
-                          default content
-                        -->
-                        <div slot="body" id="divTaskTitle"><input id="inputTaskTitle" type="text" >  ${info.title} </div>
-                        <div slot="header">  ${info.description}</div>
-                        <div slot="footer">   ${info.status}</div>
+
+                        <div slot="header"><label for="inputTaskDescription"
+                                                  class="labelProjectInput">Description</label><input
+                                    class="inputProjectMenu" id="inputTaskDescription" type="text">
+                            <div id="divTaskDescription">${info.description}</div>
+                        </div>
+                        <div slot="body"><label for="inputTaskTitle" class="labelProjectInput">Title</label><input
+                                    class="inputProjectMenu" id="inputTaskTitle" type="text">
+                            <div id="divTaskTitle">${info.title}</div>
+                        </div>
+
                     </modal>
 
                 </div>
@@ -99,7 +105,7 @@
         </div>
         <div class="inviteInProject">
             <div class="textAndLindInvite">
-           Invite link <a class="inviteProjectLink" href="{{ inviteUrl }}">{{ inviteUrl }}</a></div>
+                Invite link <a class="inviteProjectLink" href="{{ inviteUrl }}">{{ inviteUrl }}</a></div>
             <div class="inputCenter">
                 <a href="#"
                    class="inputRegisterMenu inputRegisterMenuButton">Edit project</a>
@@ -112,28 +118,28 @@
             <div class="modal-mask">
                 <div class="modal-wrapper">
                     <div class="modal-container">
+                        <div class="modal-f">
+                            <slot name="footer">
+                                <button class="modal-default-button" @click="$emit('close')">
+                                    <i class="fas fa-window-close"></i>
+                                </button>
 
-                        <div class="modal-header">
+                            </slot>
+
+                        </div>
+                        <div class="modal-h">
                             <slot name="header">
                                 default header
                             </slot>
                         </div>
 
-                        <div class="modal-body"  >
+                        <div class="modal-b">
                             <slot name="body">
 
                             </slot>
                         </div>
 
-                        <div class="modal-footer">
-                            <slot name="footer">
-                                default footer
 
-                            </slot>
-                            <button class="modal-default-button" @click="$emit('close')">
-                                <i class="fas fa-window-close"></i>
-                            </button>
-                        </div>
                     </div>
                 </div>
             </div>
@@ -141,17 +147,17 @@
     </script>
 
     <!-- app -->
-  {#  <div id="app">
-        <button id="show-modal" @click="showModal = true">Show Modal</button>
-        <!-- use the modal component, pass in the prop -->
-        <modal v-if="showModal" @close="showModal = false">
-            <!--
-              you can use custom content here to overwrite
-              default content
-            -->
-            <h3 slot="header">custom header</h3>
-        </modal>
-    </div>#}
+    {#  <div id="app">
+          <button id="show-modal" @click="showModal = true">Show Modal</button>
+          <!-- use the modal component, pass in the prop -->
+          <modal v-if="showModal" @close="showModal = false">
+              <!--
+                you can use custom content here to overwrite
+                default content
+              -->
+              <h3 slot="header">custom header</h3>
+          </modal>
+      </div>#}
 
 {% endblock %}
 
