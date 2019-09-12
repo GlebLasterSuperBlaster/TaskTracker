@@ -34,12 +34,14 @@ new Vue({
 });
 
 document.getElementById('copier').addEventListener('click', function(e) {
+    let copier = document.getElementById('copier')
     let div = document.getElementById('textCopy');
     let copytext = document.createElement('input');
     let Textcopy = document.createElement('div');
+    let copierHref = copier.getAttribute("href");
     Textcopy.innerText = 'Text copy';
     div.append(Textcopy);
-    copytext.value = window.location.href;
+    copytext.value = copierHref;
     document.body.appendChild(copytext);
     copytext.select();
     document.execCommand('copy');
