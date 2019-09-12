@@ -87,12 +87,12 @@
 
                         <div slot="header"><label for="inputTaskDescription"
                                                   class="labelProjectInput">Description</label><input
-                                    class="inputProjectMenu" id="inputTaskDescription" type="text">
-                            <div id="divTaskDescription">${info.description}</div>
+                                    class="inputProjectMenu" id="inputTaskDescription" type="text" :value="description">
+                            <div id="divTaskDescription"></div>
                         </div>
                         <div slot="body"><label for="inputTaskTitle" class="labelProjectInput">Title</label><input
-                                    class="inputProjectMenu" id="inputTaskTitle" type="text">
-                            <div id="divTaskTitle">${info.title}</div>
+                                    class="inputProjectMenu" id="inputTaskTitle" type="text" :value="title">
+                            <div id="divTaskTitle"></div>
                         </div>
 
                     </modal>
@@ -104,8 +104,8 @@
 
         </div>
         <div class="inviteInProject">
-            <div class="textAndLindInvite">
-                Invite link <a class="inviteProjectLink" href="{{ inviteUrl }}">{{ inviteUrl }}</a></div>
+            <div class="textAndLindInvite" id = "textCopy">
+                Invite link <a class="inviteProjectLink" href="{{ inviteUrl }}" id="copier">{{ inviteUrl }}  </a></div>
             <div class="inputCenter">
                 <a href="#"
                    class="inputRegisterMenu inputRegisterMenuButton">Edit project</a>
@@ -146,18 +146,6 @@
         </transition>
     </script>
 
-    <!-- app -->
-    {#  <div id="app">
-          <button id="show-modal" @click="showModal = true">Show Modal</button>
-          <!-- use the modal component, pass in the prop -->
-          <modal v-if="showModal" @close="showModal = false">
-              <!--
-                you can use custom content here to overwrite
-                default content
-              -->
-              <h3 slot="header">custom header</h3>
-          </modal>
-      </div>#}
 
 {% endblock %}
 

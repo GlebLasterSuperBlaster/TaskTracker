@@ -84,5 +84,18 @@
   height: 24px;
 }
 
-
+.project {
+  display: flex;
+  color: #212121;
+  font-family: Roboto, serif;
+  font-size: 26px;
+  font-weight: 700;
+  height: 141px;
+  border-bottom: 1px solid #dddddd;
+  width: 100%;
+  align-items: center;
+  justify-content: center;
+  padding: 53px 0 50px 0;
+  flex-direction: column;
+}
 /*# sourceMappingURL=registerpage.css.map */

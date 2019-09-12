@@ -14,8 +14,9 @@ new Vue({
     delimiters: ['${', '}'],
     data: {
         showModal: false,
-        info: {items: []},
         data: "",
+        title: "",
+        description: ""
 
     },
     methods:{
@@ -24,23 +25,24 @@ new Vue({
                  this.data = target.getAttribute("href");
              axios
                  .get('http://localhost:1025'+this.data)
-                 .then(response => (this.info = response.data.task));
-},
-        inputcontent:function () {
-            let divTitle = document.getElementById("divTaskTitle");
-            let inputTitle = document.getElementById("inputTaskTitle");
-            let divDescription = document.getElementById("divTaskDescription");
-            let inputDescription = document.getElementById("inputTaskDescription");
-            let divContentTitle = divTitle.innerText;
-            let divContentDescription = divDescription.innerText;
-            inputTitle.value = divContentTitle;
-            inputDescription.value = divContentDescription;
+                 .then((function (response) {this.title = response.data.task.title;
+                     this.description = response.data.task.description}).bind(this));
+}
 
-        }
     },
-    updated() {
-        this.inputcontent()
-    }
+
+});
+
+document.getElementById('copier').addEventListener('click', function(e) {
+    let div = document.getElementById('textCopy');
+    let copytext = document.createElement('input');
+    let Textcopy = document.createElement('div');
+    Textcopy.innerText = 'Text copy';
+    div.append(Textcopy);
+    copytext.value = window.location.href;
+    document.body.appendChild(copytext);
+    copytext.select();
+    document.execCommand('copy');
 
 });
 

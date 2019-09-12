@@ -1,6 +1,7 @@
 {% extends 'base.html.twig' %}
 {% block customStylesheets %}
-    <link rel="stylesheet" href="{{ asset('build/css/style2.css') }}" />
+
+    <link rel="stylesheet" href="{{ asset('build/css/style2.css') }}"/>
 {% endblock %}
 {% block body %}
     <div class="all">
@@ -10,8 +11,10 @@
                     <div class="group">
                         <a href="{{ path('project_create') }}" class="btn btn-default">Create project</a>
                         <a href="{{ path('project_index') }}" class="btn btn-default">All projects</a>
-                        <a href="{{ path('project_index', {'sortBy':'invited_to_projects'}) }}" class="btn btn-default">Projects I'm invited to</a>
-                        <a href="{{ path('project_index', {'sortBy':'created_projects'}) }}" class="btn btn-default">My projects</a>
+                        <a href="{{ path('project_index', {'sortBy':'invited_to_projects'}) }}" class="btn btn-default">Projects
+                            I'm invited to</a>
+                        <a href="{{ path('project_index', {'sortBy':'created_projects'}) }}" class="btn btn-default">My
+                            projects</a>
                     </div>
                 </div>
             </div>
@@ -19,10 +22,16 @@
                 <div class="container-fluid">
                     <div class="blocks">
                         {% for project in projects %}
-                            <a class="myblock" href="{{ path('project_view', {'id' :  project.id }) }}">{{ project.title }} {{ project.createdAt|date }}
-                                {% if app.user == project.createdBy %}<img class="imagecrown" src="images/crown.png" alt="crown">{% endif %}
-                            </a>
 
+                            <div class="linkDiv">
+                                <div class="marginDiv">
+                            <a class="myblock" href="{{ path('project_view', {'id' :  project.id }) }}"><i class="fas fa-crown"></i><span
+                                        class="linkText">
+ {{ project.title[:50] ~ ' ' }} {{ project.createdAt|date }}
+                                    {% if app.user == project.createdBy %}</span>{% endif %}
+                            </a>
+                                </div>
+                            </div>
                         {% endfor %}
                     </div>
                     {{ knp_pagination_render(projects) }}

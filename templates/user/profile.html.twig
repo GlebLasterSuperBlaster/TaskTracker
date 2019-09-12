@@ -9,7 +9,7 @@
     <div class="container">
         <div class="containerForRegisterMenu">
             <div class="registerMenu">
-                <form name="user" id="app" action="{{ path('profile') }}" method="post" @submit="checkForm">
+                <form name="user" action="{{ path('profile') }}" method="post">
 
                     <label class="labelRegisterMenu" for="user_email">Email</label>
                     <div class="rightShowError">
@@ -79,28 +79,83 @@
                     {% if projects %}
                         {% for project in projects %}
                             <div class="marginForLink">
-                                <a href="{{ path('project_view', {'id' : project.id }) }}" class="taskAndProjectLink">
+                                <a href="{{ path('project_view', {'id' : project.id }) }}" class="taskAndProjectLink"
+                                >
                                     {% if app.user == project.createdBy %}
-                                    <i class="fas fa-crown"></i>
+                                        <i class="fas fa-crown"></i>
                                     {% endif %}
                                     {{ project.title }}</a></div>
                         {% endfor %}
                     {% endif %}
+
+
                 </div>
             </div>
             <span class="textProejctAndTask"><p>Tasks</p></span>
             <div class="containerForTextAndProjectandTask">
 
-                <div class="task">
+                <div class="task" id="app">
                     {% if user.executedTasks %}
-                    {% for task in user.executedTasks %}
-                        <div class="marginForLink"><a href="#" class="taskAndProjectLink">{{ task.title }}</a></div>
-                    {% endfor %}
+                        {% for task in user.executedTasks %}
+                            <div class="marginForLink"><a href="{{ path('task_view', {'id' : task.id}) }}"
+                                                          class="taskAndProjectLink"  id="show-modal" @click="showModal = true" onclick="event.preventDefault()"
+                                                          v-on:click="getLink">{{ task.title }} </a></div>
+                        {% endfor %}
                     {% endif %}
+
+                    <modal v-if="showModal" @close="showModal = false">
+
+                        <div slot="header"><label for="inputTaskDescription"
+                                                  class="labelProjectInput">Description</label><input
+                                    class="inputProjectMenu" id="inputTaskDescription" type="text" :value="description">
+                            <div id="divTaskDescription"></div>
+                        </div>
+                        <div slot="body"><label for="inputTaskTitle" class="labelProjectInput">Title</label><input
+                                    class="inputProjectMenu" id="inputTaskTitle" type="text" :value="title">
+                            <div id="divTaskTitle"></div>
+                        </div>
+
+                    </modal>
                 </div>
             </div>
         </div>
     </div>
 
+
+    <script type="text/x-template" id="modal-template">
+        <transition name="modal">
+            <div class="modal-mask">
+                <div class="modal-wrapper">
+                    <div class="modal-container">
+                        <div class="modal-f">
+                            <slot name="footer">
+                                <button class="modal-default-button" @click="$emit('close')">
+                                    <i class="fas fa-window-close"></i>
+                                </button>
+
+                            </slot>
+
+                        </div>
+                        <div class="modal-h">
+                            <slot name="header">
+                                default header
+                            </slot>
+                        </div>
+
+                        <div class="modal-b">
+                            <slot name="body">
+
+                            </slot>
+                        </div>
+
+
+                    </div>
+                </div>
+            </div>
+        </transition>
+    </script>
 {% endblock %}
 
+{% block customJs %}
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script src="{{ asset('build/js/viewproject.js') }}"></script>{% endblock %}

@@ -15,7 +15,7 @@
   font-family: Roboto, serif;
   font-size: 26px;
   font-weight: 700;
-  height: 159px;
+  height: 141px;
   border-bottom: 1px solid #dddddd;
   width: 100%;
   align-items: center;
@@ -467,10 +467,4 @@
 
 
 
-#divTaskTitle{
-  font-size: 0;
-}
 
-#divTaskDescription{
-  font-size: 0;
-}

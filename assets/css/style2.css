@@ -685,6 +685,10 @@ input {
   -webkit-transition: opacity 0.2s ease-in-out;
   -o-transition: opacity 0.2s ease-in-out;
   transition: opacity 0.2s ease-in-out;
+  margin-bottom: 20px;
+  height: 50px;
+  display: flex;
+  justify-content: center;
 }
 .page-nav-inner {
   display: -webkit-flex;
@@ -1056,6 +1060,11 @@ ul.page-nav__list > li.active > a {
   -ms-flex-flow: column nowrap;
   flex-flow: column nowrap;
   padding: 60px 50px;
+}
+
+.marginBlock{
+  width: 100%;
+  height: 20px;
 }
 @media (max-width: 992px) {
   .page-content {
@@ -2002,28 +2011,52 @@ ul.page-nav__list > li.active > a {
   line-height: 1.54;
 }
 .blocks {
-  margin-top: 30px;
   display: flex;
-  justify-content: flex-start;
+  justify-content: space-around;
   flex-wrap: wrap;
+  width: 80%;
+  margin: 0 auto;
 }
 .myblock {
+
     text-decoration: none;
-    padding-left: 0.5%;
-    margin-right: 1.5%;
-    margin-top: 0.5%;
-    width: 150px;
-    height: 120px;
-    border-radius: 4px;
-    color: #fff;
-    opacity: 0.9;
-    background: grey;
+  color: #212121;
+  font-family: Roboto, serif;
+
+}
+
+.linkText{
+  padding-top: 20px;
+  font-size: 16px;
+  font-weight: 400;
+  border-bottom: 1px dashed #212121
+}
+
+.marginDiv{
+  margin-top: 20px;
+  margin-left: 20px;
 }
 .myblock:hover{
     text-decoration: none;
-    color: #fff;
+  color: #212121;
     opacity: 1;
+
 }
+
+.myblock:visited{
+  color: #212121;
+}
+
+.linkDiv{
+  width: 400px;
+  height: 130px;
+  border-radius: 5px;
+  border: 2px solid #dddddd;
+  background-color: white;
+  display: flex;
+  margin-bottom: 40px;
+}
+
 .imagecrown {
     padding-top: 60px;
 }
@@ -2091,4 +2124,56 @@ text-decoration:none;
     width: 1000px;
     overflow: auto;
     text-align: left;
+}
+
+.btn{
+  box-shadow: 0 3px 6px #f4f4f4;
+  border-radius: 5px;
+  background-color: #f4f4f4;
+  color: black;
+  font-family: Roboto, serif;
+  font-size: 13px;
+  font-weight: 700;
+  transition: 2s;
+}
+
+.btn:hover{
+  color: #f4f4f4;
+  background-color: black;
+  text-decoration: none;
+}
+
+.pagination>li>a{
+  color: black;
+}
+
+.pagination>.active>span{
+  background-color: black;
+  color: #f4f4f4;
+  border-color: black;
+}
+
+.pagination>.active>span:hover{
+  background-color: #f4f4f4;
+  color: black;
+  border-color: #ddd;
+}
+
+.pagination>li>a:hover{
+  color: black;
+}
+
+.project {
+  display: flex;
+  color: #212121;
+  font-family: Roboto, serif;
+  font-size: 26px;
+  font-weight: 700;
+  height: 141px;
+  border-bottom: 1px solid #dddddd;
+  width: 100%;
+  align-items: center;
+  justify-content: center;
+  padding: 53px 0 50px 0;
+  flex-direction: column;
 }
